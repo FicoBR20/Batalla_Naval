@@ -1,21 +1,29 @@
 package Control;
 
 import Modelo.Tablero;
+import vista.FondoPanel;
 import vista.GUI;
 
 import javax.swing.*;
 import java.awt.*;
 
 public class Lanzar {
+    private GUI gui;
+    private FondoPanel fondoPanel;
+    private Tablero tablero;
+
+    public Lanzar() {
+        gui = new GUI();
+        fondoPanel = new FondoPanel();
+        tablero = new Tablero();
+        fondoPanel = new FondoPanel();
+        fondoPanel.set_ruta_fondo("/recursos/fondo_1.png");
+
+        fondoPanel.add(tablero, BorderLayout.CENTER);
+        gui.add(fondoPanel, BorderLayout.CENTER);
+    }
+
     public static void main(String[] args) {
-        GUI gui = new GUI();
-        Tablero tablero = new Tablero();
-        Tablero tablero2 = new Tablero();
-        JPanel panel = new JPanel();
-
-        panel.add(tablero, BorderLayout.CENTER);
-        panel.add(tablero2, BorderLayout.CENTER);
-
-        gui.add(panel, BorderLayout.NORTH);
+        Lanzar lanzar = new Lanzar();
     }
 }

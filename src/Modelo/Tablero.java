@@ -9,31 +9,23 @@ import java.awt.event.ActionListener;
 
 public class Tablero extends FondoPanel {
 
-    private  int fila;
-    private  int columna;
     private  Casilla[][] casilla;
     private Escucha escucha;
 
     public Tablero() {
-//        set_ruta_fondo("/recursos/fondo.png");
+        set_ruta_fondo("/recursos/fondo.png");
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        this.setLayout(gridBagLayout);
         this.setPreferredSize(new Dimension(500,500));
         this.setBackground(new Color(0xF192C8));
         set_tablero();
-        iniciar();
 //        ubicar_flota_persona();
 //        bloquear_rejilla();
 //        tablero_random();
     }
 
-    private void iniciar() {
-        for (int i = 0; i < 11; i++) {
-            for (int j = 0; j < 11; j++) {
-                this.add(casilla[i][j],BorderLayout.CENTER);
-            }
-        }
-    }
-
     private void set_tablero() {
+        GridBagConstraints gbc = new GridBagConstraints();
         casilla = new Casilla[11][11];
         escucha = new Escucha();
 
@@ -47,13 +39,22 @@ public class Tablero extends FondoPanel {
                 casilla[i][j].setFont(new Font(Font.SERIF,Font.BOLD,20));
                 casilla[i][j].setForeground(new Color(0xFFFFFF));
 
+                gbc.gridx=i; // columna 0
+                gbc.gridy=j; // fila 0
+                gbc.gridwidth=1; // ocupara 4 columnas
+                gbc.gridheight=1; // ocupara 3 filas
+                this.add(casilla[i][j],gbc);
+
                 char letra = (char) (64+j);
                 casilla[0][j].setText(String.valueOf(letra));
+                casilla[0][j].setBorder(BorderFactory.createTitledBorder(""));
                 casilla[0][j].lock();
             }
                 casilla[i][0].setText(String.valueOf(i));
+                casilla[i][0].setBorder(BorderFactory.createTitledBorder(""));
                 casilla[i][0].lock();
         }
+        casilla[0][0].setText("");
     }
 
     private void ubicar_flota_persona() {
@@ -84,9 +85,9 @@ public class Tablero extends FondoPanel {
 
                         casilla[i][j].cambia_estado();
 
-                        JOptionPane.showMessageDialog(null,
-                                        "\nNuevo EStado "+
-                                        casilla[i][j].get_estado());
+//                        JOptionPane.showMessageDialog(null,
+//                                        "\nNuevo EStado "+
+//                                        casilla[i][j].get_estado());
                     }
                 }
             }

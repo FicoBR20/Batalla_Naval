@@ -20,7 +20,7 @@ public class GUI extends JFrame {
 
         //Default JFrame configuration
         this.setTitle("The Title app");
-        this.setSize(1300,700);
+        this.setSize(800,600);
         //this.pack();
         this.setResizable(true);
         this.setVisible(true);

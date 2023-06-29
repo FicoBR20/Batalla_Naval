@@ -10,8 +10,18 @@ public class Casilla extends JButton {
     private  int turno;
     private int fila;
     private int columna;
+    private ImageIcon imageIcon;
 
     public Casilla() {
+
+//        this.setBackground(null);
+//        this.setContentAreaFilled(false);
+//        this.setBorderPainted(false);
+//        this.setBorder(BorderFactory.createEmptyBorder());
+//        this.setHorizontalTextPosition(SwingConstants.CENTER);
+//        this.setFocusable(false); //Quita linea de los botones
+        imageIcon = new ImageIcon();
+
         iniciar();
     }
 
@@ -19,19 +29,17 @@ public class Casilla extends JButton {
 //        estado = 1;
         turno = 1;
         this.setPreferredSize(new Dimension(40,40));
-        this.setBorder(BorderFactory.createTitledBorder(""));
         es_agua();
     }
 
     public void es_agua() {
 
-//        ImageIcon imagen = new ImageIcon();
-//        imagen = new ImageIcon(getClass().getResource("/recursos/agua.png"));
-//        this.setIcon(new ImageIcon(imagen.getImage().getScaledInstance(10,10,Image.SCALE_SMOOTH)));
-//        this.setIcon(imagen);
+//        imageIcon = new ImageIcon();
+//        imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
+//        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(10,10,Image.SCALE_SMOOTH)));
+//        this.setIcon(imageIcon);
 
         this.setBackground(new Color(0xBCEAC0));
-        this.setIcon(new ImageIcon("recursos/agua.png"));
     }
     public void lock() {
         this.setBackground(new Color(150));
