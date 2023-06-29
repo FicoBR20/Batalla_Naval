@@ -45,6 +45,9 @@ public class GUI extends JFrame {
      */
     private void initGUI() {
 
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+
         jp01 = new JP_01_Info_Reglas_del_Juego();
         jp01.setVisible(true);
         jp01.setOpaque(true);
