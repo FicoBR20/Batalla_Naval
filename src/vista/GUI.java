@@ -2,6 +2,8 @@ package vista;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * This class is used for ...
@@ -10,7 +12,16 @@ import java.awt.*;
  */
 public class GUI extends JFrame {
 
+    private JP_01_Info_Reglas_del_Juego jp01;
+
+    /**
+     * Clase Escucha implementa Action listener
+     */
+    private Escucha escucha;
+
     private Header headerProject;
+    private JButton jButton_Next;
+    private JPanel jPanel_Inicio;
 
     /**
      * Constructor of GUI class
@@ -19,10 +30,10 @@ public class GUI extends JFrame {
         initGUI();
 
         //Default JFrame configuration
-        this.setTitle("The Title app");
-        this.setSize(200,100);
+        this.setTitle("Batalla Naval");
+        this.setSize(600,400);
         //this.pack();
-        this.setResizable(true);
+        this.setResizable(false);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -33,12 +44,37 @@ public class GUI extends JFrame {
      * create Listener and control Objects used for the GUI class
      */
     private void initGUI() {
-        //Set up JFrame Container's Layout
-        //Create Listener Object and Control Object
-        //Set up JComponents
-        headerProject = new Header("Header ...", Color.BLACK);
 
-        this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
+        GridBagLayout gridBagLayout = new GridBagLayout();
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        jp01 = new JP_01_Info_Reglas_del_Juego();
+        jp01.setVisible(true);
+        jp01.setOpaque(true);
+        jp01.setEnabled(true);
+
+
+        escucha = new Escucha();
+
+
+        jButton_Next = new JButton("next");
+        jButton_Next.setVisible(true);
+        jButton_Next.setBackground(Color.BLUE);
+        jButton_Next.setForeground(Color.white);
+
+        jButton_Next.addActionListener(escucha);
+
+        jPanel_Inicio = new JPanel();
+        jPanel_Inicio.setVisible(true);
+        jPanel_Inicio.setBackground(Color.ORANGE);
+        jPanel_Inicio.setEnabled(true);
+
+
+        headerProject = new Header("The naval WAR game", Color.BLACK);
+
+        this.add(headerProject,BorderLayout.NORTH);
+        this.add(jButton_Next, BorderLayout.SOUTH);
+        this.add(jPanel_Inicio, BorderLayout.CENTER);
     }
 
     /**
@@ -48,14 +84,50 @@ public class GUI extends JFrame {
      */
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
-            GUI miProjectGUI = new GUI();
+            GUI miBatalla = new GUI();
         });
+    }
+
+    /**
+     * Metodo que actualiza el jPanel_Inicio
+     * @param jPanel_new
+     */
+    public void cambiarPaneles( JPanel jPanel_new){
+
+        this.remove(jPanel_Inicio);
+        jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
+        this.add(jPanel_Inicio,BorderLayout.CENTER);
+
+        repaint();
+
+
     }
 
     /**
      * inner class that extends an Adapter Class or implements Listeners used by GUI class
      */
-    private class Escucha {
+    private class Escucha implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+            if (e.getSource()==jButton_Next){
+
+
+
+                jPanel_Inicio.setBackground(Color.CYAN);
+                jPanel_Inicio.add(jp01, BorderLayout.CENTER);
+                jButton_Next.setVisible(false);
+
+               // cambiarPaneles(jp01);
+
+
+                System.out.println(" estoy escuchando bien");
+            }
+
+        }
+
 
     }
+
 }
