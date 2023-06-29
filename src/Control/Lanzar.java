@@ -16,11 +16,18 @@ public class Lanzar {
         gui = new GUI();
         fondoPanel = new FondoPanel();
         tablero = new Tablero();
+
+        JButton button = new JButton();
+        button.setPreferredSize(new Dimension(50,50));
+
         fondoPanel = new FondoPanel();
         fondoPanel.set_ruta_fondo("/recursos/fondo_1.png");
 
         fondoPanel.add(tablero, BorderLayout.CENTER);
+
+
         gui.add(fondoPanel, BorderLayout.CENTER);
+        gui.setVisible(true);
     }
 
     public static void main(String[] args) {

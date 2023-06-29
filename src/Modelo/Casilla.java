@@ -14,14 +14,12 @@ public class Casilla extends JButton {
 
     public Casilla() {
 
-//        this.setBackground(null);
+        this.setBackground(null);
 //        this.setContentAreaFilled(false);
-//        this.setBorderPainted(false);
-//        this.setBorder(BorderFactory.createEmptyBorder());
-//        this.setHorizontalTextPosition(SwingConstants.CENTER);
-//        this.setFocusable(false); //Quita linea de los botones
-        imageIcon = new ImageIcon();
-
+        this.setBorderPainted(false);
+        this.setBorder(BorderFactory.createEmptyBorder());
+        this.setHorizontalTextPosition(SwingConstants.CENTER);
+        this.setFocusable(false); //Quita linea de los botones
         iniciar();
     }
 
@@ -33,20 +31,17 @@ public class Casilla extends JButton {
     }
 
     public void es_agua() {
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
 
-//        imageIcon = new ImageIcon();
-//        imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
-//        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(10,10,Image.SCALE_SMOOTH)));
-//        this.setIcon(imageIcon);
-
-        this.setBackground(new Color(0xBCEAC0));
     }
     public void lock() {
-        this.setBackground(new Color(150));
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/coordenadas.png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
     public void es_trampa() {
-        this.setBackground(new Color(0x000000));
+;
     }
 
     public void es_flota() {
@@ -54,10 +49,13 @@ public class Casilla extends JButton {
     }
 
     public void esta_tocado() {
-        this.setBackground(new Color(0xF37C43));
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/tocado.png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
     private void cayo_al_agua() {
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/equis.png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
         cambia_turno();
         this.setBackground(new Color(0x000000));
     }
