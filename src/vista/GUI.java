@@ -20,7 +20,7 @@ public class GUI extends JFrame {
 
         //Default JFrame configuration
         this.setTitle("The Title app");
-        this.setSize(200,100);
+        this.setSize(1300,700);
         //this.pack();
         this.setResizable(true);
         this.setVisible(true);
@@ -38,7 +38,7 @@ public class GUI extends JFrame {
         //Set up JComponents
         headerProject = new Header("Header ...", Color.BLACK);
 
-        this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
+//        this.add(headerProject,BorderLayout.NORTH); //Change this line if you change JFrame Container's Layout
     }
 
     /**
