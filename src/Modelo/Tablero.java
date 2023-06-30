@@ -34,7 +34,7 @@ public class Tablero extends FondoPanel {
                 casilla[i][j] = new Casilla();
                 casilla[i][j].set_estado(1);
                 casilla[i][j].addActionListener(escucha);
-                casilla[i][j].set_fila_columna(i,j);
+                casilla[i][j].set_fila_columna(j,i);
                 casilla[i][j].set_estado(1);
                 casilla[i][j].setFont(new Font(Font.SERIF,Font.BOLD,20));
                 casilla[i][j].setForeground(new Color(0xFFFFFF));
@@ -58,10 +58,33 @@ public class Tablero extends FondoPanel {
     }
 
     private void ubicar_flota_persona() {
-        casilla[1][1].set_estado(3);
-        casilla[3][3].set_estado(3);
-        casilla[2][2].set_estado(4);
-        casilla[5][1].set_estado(5);
+        rellenar(1,1,"v",4);
+        rellenar(3,3,"h",3);
+        rellenar(2,8,"h",3);
+    }
+
+    private void rellenar(int fila, int columna, String orientacion, int tamaño) {
+        if (orientacion == "v"){
+            if (fila <= 11 - tamaño ){
+                for (int i = 0; i < tamaño; i++) {
+                    casilla[columna][fila].set_estado(4);
+//                    casilla[columna][fila].es_flota();
+                    fila++;
+                }
+            }else {
+                JOptionPane.showMessageDialog(null, "Fuera de rango");
+            }
+        }
+        else if (orientacion == "h"){
+            if (columna <= 11 - tamaño ){
+                for (int i = 0; i < tamaño; i++) {
+                    casilla[columna][fila].set_estado(4);
+                    columna++;
+                }
+            } else {
+            JOptionPane.showMessageDialog(null, "Fuera de rango");
+        }
+        }
     }
 
     private void bloquear_rejilla() {
@@ -84,14 +107,11 @@ public class Tablero extends FondoPanel {
                                         casilla[i][j].getFila()+
                                         "\nColumna "+
                                         casilla[i][j].getColumna()+
-                                        "\nEStado "+
+                                        "\nEstado de la casilla "+
                                         casilla[i][j].get_estado());
 
                         casilla[i][j].cambia_estado();
 
-//                        JOptionPane.showMessageDialog(null,
-//                                        "\nNuevo EStado "+
-//                                        casilla[i][j].get_estado());
                     }
                 }
             }

@@ -33,8 +33,8 @@ public class Casilla extends JButton {
     public void es_agua() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
-
     }
+
     public void lock() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/coordenadas.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
