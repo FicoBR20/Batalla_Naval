@@ -33,7 +33,7 @@ public class Armamento {
      * de una nave de combate    asi;
      * 0 -> es agua
      * 1 -> es metal
-     * 2 -> fue tocado o impactado por el rival.
+     * 2 -> fue tocado o impactado por el rival.//duda...deber ir aqui?
      * ejemplo: [0,1,1,1,0] seria el submarino
      */
     private ArrayList<Integer>carroceria;
