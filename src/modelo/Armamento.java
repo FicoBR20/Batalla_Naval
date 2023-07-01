@@ -53,6 +53,12 @@ public class Armamento {
      * entre los entes presentes en la batalla.
      */
     private int espacio_libre;
+
+    /**
+     * Metodo que representa el impacto recibido
+     * por una nave en una parte de su carroceria.
+     */
+    private int impactada;
     /**
      * atributo que determina el limite de supervivencia
      * de una nave, el default es 100% se impactaron toda la nave
@@ -112,7 +118,7 @@ public class Armamento {
     public void setCarroceria_Basica(int celdas_X) {
 
         for (int i = 0; i < celdas_X; i++) {
-            carroceria.add(1);
+            carroceria.add(1); // 1 -> Semantica es METAL osea, NO es AGUA.
         }
     }
 
@@ -133,7 +139,65 @@ public class Armamento {
         is_rotate=true;
     }
 
+    /**
+     * Metodo que retorna el entero asociado al
+     * icono que usa la nave
+     * @return
+     */
+    public int getIcono_asociado() {
+        return icono_asociado;
+    }
 
+    /**
+     * Metodo que asigna un entero asociado al icono
+     * que usara la nave de combate.
+     * @param icono_asociado
+     */
+    public void setIcono_asociado(int icono_asociado) {
+        this.icono_asociado = icono_asociado;
+    }
+
+    /**
+     * Metodo que retorna el valor del espacio
+     * minimo entre las naves.
+     * @return
+     */
+    public int getEspacio_libre() {
+        return espacio_libre;
+    }
+
+    /**
+     * Metodo que asigna el espacio minimo que debe
+     * existir entre las naves
+     * @param espacio_libre
+     */
+    public void setEspacio_libre(int espacio_libre) {
+        this.espacio_libre = espacio_libre;
+    }
+
+    /**
+     * Metodo que entrega el porcentaje impactado
+     * sobre la nave, basado en las areas TOCADAS
+     * @return
+     */
+    public double getNivel_de_impactos() {
+        return nivel_de_impactos;
+    }
+
+    /**
+     * Metodo que calcula el porcentaje de impactos
+     * recibida por una nave, basandose en la cantidad
+     * de casillas TOCADAS.
+     */
+    public void setNivel_de_impactos() {
+        int auxiliar=0;
+        for (int i = 0; i < carroceria.size(); i++) {
+            if (carroceria.get(i)==3){
+                auxiliar++;
+            }
+        }
+        nivel_de_impactos = carroceria.size()/auxiliar;
+    }
 
     //========================================================================
     /**
