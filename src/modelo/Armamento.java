@@ -14,6 +14,8 @@ public class Armamento {
      * atributo que representa la coordenada
      * x,y de la proa de una nave o cualquier
      * ente presente an la batalla.
+     * La ubicacion debe estar asociada al grid del Tablero
+     * tomando en cuenta la medida de cada fila y columna
      */
     private Point sitio_proa;
     /**
@@ -33,8 +35,7 @@ public class Armamento {
      * de una nave de combate    asi;
      * 0 -> es agua
      * 1 -> es metal
-     * 2 -> fue tocado o impactado por el rival.//duda...deber ir aqui?
-     * ejemplo: [0,1,1,1,0] seria el submarino
+     * ejemplo: [1,1,1] es el submarino
      */
     private ArrayList<Integer>carroceria;
     /**
@@ -57,4 +58,96 @@ public class Armamento {
      * de una nave, el default es 100% se impactaron toda la nave
      */
     private double nivel_de_impactos;
+
+    /**
+     * Metodo que retorna un objeto Point
+     * de cordenadas (x,y).
+     * @return
+     */
+    public Point getSitio_proa() {
+        return sitio_proa.getLocation();
+    }
+
+    /**
+     * Metodo que asigna los valores de las coordenadas
+     * a un objeto Point.
+     * @param varX
+     * @param varY
+     */
+    public void setSitio_proa(int varX,int varY) {
+        sitio_proa.setLocation(varX,varY);
+    }
+
+    /**
+     * Metodo que retorna el nombre de
+     * un Arma naval.
+     * @return
+     */
+    public String getNombre_Arma() {
+        return nombre_Arma;
+    }
+
+    /**
+     * Metodo que asigna el nombre de
+     * un arma naval.
+     * @param nombre_Arma
+     */
+    public void setNombre_Arma(String nombre_Arma) {
+        this.nombre_Arma = nombre_Arma;
+    }
+
+    /**
+     * Metodo que retorna el array carroceria
+     * @return
+     */
+    public ArrayList<Integer> getCarroceria() {
+        return carroceria;
+    }
+
+    /**
+     * Metodo que configura un Buque para la batalla
+     * tomando como parametro la cantidad de celdas
+     * @param celdas_X
+     */
+    public void setCarroceria_Basica(int celdas_X) {
+
+        for (int i = 0; i < celdas_X; i++) {
+            carroceria.add(1);
+        }
+    }
+
+    /**
+     * Metodo que retorna la variable
+     * is_rotate.
+     * @return
+     */
+    public Boolean getIs_rotate() {
+        return is_rotate;
+    }
+
+    /**
+     * Metodo que modifica a true
+     * la variable is_rotate.
+     */
+    public void setIs_rotate() {
+        is_rotate=true;
+    }
+
+
+
+    //========================================================================
+    /**
+     * Metodo constructor
+     */
+    public Armamento(){
+        sitio_proa.setLocation(0,0);
+        nombre_Arma = " ";
+        fuselaje=null;
+        carroceria=null;
+        is_rotate=false;
+        icono_asociado=99;
+        espacio_libre=1;
+        nivel_de_impactos=100.0;
+
+    }
 }
