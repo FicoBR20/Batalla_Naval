@@ -1,7 +1,7 @@
 package controlador;
 
 import modelo.Armamento;
-import vista.GUI;
+import vista.GUI_pF;
 
 import java.awt.*;
 
@@ -11,7 +11,7 @@ import java.awt.*;
  */
 public class Lanza_Batalla {
 
-    private GUI gui;
+    private GUI_pF guiPF;
     private Armamento armamento;
 
     /**
@@ -26,7 +26,7 @@ public class Lanza_Batalla {
      * de la clase.
      */
     public void init(){
-        gui = new GUI();
+        guiPF = new GUI_pF();
         armamento = new Armamento();
 
         enfrentamiento();
