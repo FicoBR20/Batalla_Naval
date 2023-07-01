@@ -10,6 +10,8 @@ import java.util.LinkedList;
  */
 public class Armamento {
 
+    //========================================================================== ATRIBUTOS DE LA CLASE==================
+
     /**
      * atributo que representa la coordenada
      * x,y de la proa de una nave o cualquier
@@ -66,6 +68,14 @@ public class Armamento {
     private double nivel_de_impactos;
 
     /**
+     * atributo que define si una nave se hunde
+     * segun el porcentaje de TOCADOS que reciba.
+     */
+    private Boolean nave_Hundida;
+
+    //======================================================================= METODOS DE LA CLASE====================
+
+    /**
      * Metodo que retorna un objeto Point
      * de cordenadas (x,y).
      * @return
@@ -115,7 +125,7 @@ public class Armamento {
      * tomando como parametro la cantidad de celdas
      * @param celdas_X
      */
-    public void setCarroceria_Basica(int celdas_X) {
+    public void setCarroceria_Basica(int celdas_X) {//TODO SE PUEDE PLANTEAR UN ARRAY DE POINTS.
 
         for (int i = 0; i < celdas_X; i++) {
             carroceria.add(1); // 1 -> Semantica es METAL osea, NO es AGUA.
@@ -189,7 +199,7 @@ public class Armamento {
      * recibida por una nave, basandose en la cantidad
      * de casillas TOCADAS.
      */
-    public void setNivel_de_impactos() {
+    public void setNivel_de_impactos() {//TODO SE DEBE VERIFICAR ESTE METODO, CREO QUE ES MEJOR CON POINTS EN EL ARRAY.
         int auxiliar=0;
         for (int i = 0; i < carroceria.size(); i++) {
             if (carroceria.get(i)==3){
@@ -199,7 +209,49 @@ public class Armamento {
         nivel_de_impactos = carroceria.size()/auxiliar;
     }
 
-    //========================================================================
+    public int getImpactada() {
+        return impactada;
+    }
+
+    /**
+     * Metodo que actualiza el array de corroceria
+     * asignandole al campo el valor de 3 en inicacion
+     * que La nave fue TOCADA por el rival.
+     * @param sito_del_disparo
+     */
+    public void setImpactada(Point sito_del_disparo) {
+
+        for (int i = 0; i < carroceria.size(); i++) {
+            if (carroceria.contains(sito_del_disparo)){
+                carroceria.set(i, 3);//semantica 3 -> simboliza que fue impactado
+            }
+
+        }
+
+        this.impactada = impactada;
+    }
+
+    /**
+     * Atributo que retorna
+     * true -> la nave fue hundida en la batalla.
+     * false -> la nave NO esta hundida todavia.
+     * @return
+     */
+    public Boolean getNave_Hundida() {
+        return nave_Hundida;
+    }
+
+    /**
+     * Metodo que define el humdimiento de una nave
+     * segun el porcentaje del nievl de impacto (TOCADOS)
+     */
+    public void setNave_Hundida() {
+        if (nivel_de_impactos==100.0){
+            nave_Hundida=true;
+        }
+    }
+
+    //========================================================================METODO CONSTRUCTOR=============
     /**
      * Metodo constructor
      */
@@ -209,9 +261,11 @@ public class Armamento {
         fuselaje=null;
         carroceria=null;
         is_rotate=false;
-        icono_asociado=99;
+        icono_asociado=99; // valor de inicializacion sin SEMANTICA
         espacio_libre=1;
+        impactada = 99; // valor de inicializacion sin SEMANTICA
         nivel_de_impactos=100.0;
+        nave_Hundida = false;
 
     }
 }
