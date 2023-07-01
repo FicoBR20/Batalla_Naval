@@ -73,6 +73,19 @@ public class Armamento {
      */
     private Boolean nave_Hundida;
 
+    /**
+     * atributo que representa la cantidad de
+     * casillas ocupadas por la nave en el sentido
+     * del eje X osea HORIZONTALMENTE
+     */
+    private int espacio_ocupado_X;
+
+    /**
+     * atributo que representa la cantidad de
+     * casillas ocupadas por la nave en el sentido
+     * del eje Y osea VERTICALMENTE
+     */private int getEspacio_ocupado_Y;
+
     //======================================================================= METODOS DE LA CLASE====================
 
     /**
@@ -249,6 +262,59 @@ public class Armamento {
         if (nivel_de_impactos==100.0){
             nave_Hundida=true;
         }
+    }
+
+    /**
+     * Metodo que entrega la likedlist fuselaje
+     * @return
+     */
+    public LinkedList<Object> getFuselaje() {
+        return fuselaje;
+    }
+
+    /**
+     * Metodo que configura la linkedlist fuselaje
+     * contiene 6 atributos de la clase distribuidos
+     * en 6 campos.
+     */
+    public void setFuselaje() {
+        fuselaje.add(sitio_proa);// campo [0]
+        fuselaje.add(nombre_Arma);// campo[1]
+        fuselaje.add(carroceria);// campo[2]
+        fuselaje.add(is_rotate);// campo[3]
+        fuselaje.add(icono_asociado);// campo[4]
+        fuselaje.add(espacio_libre);// campo[5]
+
+    }
+
+    /**
+     * Metodo que entrega el espacio ocupado en X
+     * por una nave.
+     * @return
+     */
+    public int getEspacio_ocupado_X() {
+        return espacio_ocupado_X;
+    }
+
+    /**
+     * Metodo que configura el espacio ocupado
+     * en X por una nave.
+     */
+    public void setEspacio_ocupado_X() {
+        if (is_rotate==true){
+            espacio_ocupado_X=1;
+        }
+        else {
+            espacio_ocupado_X=carroceria.size();
+        }
+    }
+//TODO implementar esta funcion
+    public int getGetEspacio_ocupado_Y() {
+        return getEspacio_ocupado_Y;
+    }
+//TODO implementar esta funcion
+    public void setGetEspacio_ocupado_Y(int getEspacio_ocupado_Y) {
+        this.getEspacio_ocupado_Y = getEspacio_ocupado_Y;
     }
 
     //========================================================================METODO CONSTRUCTOR=============
