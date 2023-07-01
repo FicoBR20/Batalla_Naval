@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
  * @autor Carlos Felipe Montoya carlos.felipe.montoya@correounivalle.edu.co
  * @version v.1.0.0 date:21/03/2023
  */
-public class GUI extends JFrame {
+public class GUI_pF extends JFrame {
 
     private JP_01_Info_Reglas_del_Juego jp01;
 
@@ -26,7 +26,7 @@ public class GUI extends JFrame {
     /**
      * Constructor of GUI class
      */
-    public GUI(){
+    public GUI_pF(){
         initGUI();
 
         //Default JFrame configuration
@@ -84,7 +84,7 @@ public class GUI extends JFrame {
      */
     public static void main(String[] args){
         EventQueue.invokeLater(() -> {
-            GUI miBatalla = new GUI();
+            GUI_pF miBatalla = new GUI_pF();
         });
     }
 
