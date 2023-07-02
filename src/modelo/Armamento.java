@@ -346,4 +346,7 @@ public class Armamento {
         nave_Hundida = false;
 
     }
+    public Armamento(String nombre_Nave){
+        this.nombre_Arma=nombre_Nave;
+    }
 }
