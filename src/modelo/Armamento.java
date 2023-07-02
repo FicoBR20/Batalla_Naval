@@ -84,7 +84,7 @@ public class Armamento {
      * atributo que representa la cantidad de
      * casillas ocupadas por la nave en el sentido
      * del eje Y osea VERTICALMENTE
-     */private int getEspacio_ocupado_Y;
+     */private int espacio_ocupado_Y;
 
     //======================================================================= METODOS DE LA CLASE====================
 
@@ -192,10 +192,9 @@ public class Armamento {
     /**
      * Metodo que asigna el espacio minimo que debe
      * existir entre las naves
-     * @param espacio_libre
      */
-    public void setEspacio_libre(int espacio_libre) {
-        this.espacio_libre = espacio_libre;
+    public void setEspacio_libre() {
+        espacio_libre=1;
     }
 
     /**
@@ -288,7 +287,7 @@ public class Armamento {
     }
 
     /**
-     * Metodo que entrega el espacio ocupado en X
+     * Metodo que entrega el espacio ocupado en X -> HORIZONTALMENTE
      * por una nave.
      * @return
      */
@@ -298,7 +297,7 @@ public class Armamento {
 
     /**
      * Metodo que configura el espacio ocupado
-     * en X por una nave.
+     * en X -> HORIZONTALMENTE por una nave.
      */
     public void setEspacio_ocupado_X() {
         if (is_rotate==true){
@@ -308,13 +307,26 @@ public class Armamento {
             espacio_ocupado_X=carroceria.size();
         }
     }
-//TODO implementar esta funcion
-    public int getGetEspacio_ocupado_Y() {
-        return getEspacio_ocupado_Y;
+
+    /**
+     * Metodo que entrega el espacio ocupado en Y -> VERTICALMENTE
+     * por una nave.
+     * @return
+     */public int getEspacio_ocupado_Y() {
+        return espacio_ocupado_Y;
     }
-//TODO implementar esta funcion
-    public void setGetEspacio_ocupado_Y(int getEspacio_ocupado_Y) {
-        this.getEspacio_ocupado_Y = getEspacio_ocupado_Y;
+
+    /**
+     * Metodo que configura el espacio ocupado
+     * en Y -> VERTICALMENTE por una nave.
+     */
+    public void setEspacio_ocupado_Y() {
+        if (is_rotate==true){
+            espacio_ocupado_Y=carroceria.size();
+        }
+        else {
+            espacio_ocupado_Y=1;
+        }
     }
 
     //========================================================================METODO CONSTRUCTOR=============
