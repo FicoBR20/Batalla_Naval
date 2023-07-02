@@ -9,7 +9,7 @@ import java.awt.*;
 
 public class Lanzar {
     private GUI gui;
-    private FondoPanel fondoPanel;
+    private FondoPanel fondoPanel; // maneja la asignacion de imagenes
     private Tablero tablero;
 
     public Lanzar() {
