@@ -6,13 +6,21 @@ import java.awt.*;
 
 public class
 Casilla extends JButton {
-    
+
+    /**
+     * Atributo usado para la asignacion especifica de
+     * una imagen a un objeto de tipo Casilla
+     */
     private  int estado;
     private  int turno;
     private int fila;
     private int columna;
     private ImageIcon imageIcon;
 
+    /**
+     * Metodo constructor que configura
+     * los atributos iniciales de un JButton
+     */
     public Casilla() {
 
         this.setBackground(null);
@@ -106,7 +114,8 @@ Casilla extends JButton {
 
     /**
      * Metodo que actualiza el atributo
-     * estado.
+     * estado, el cual asigna una imagen a un JButton
+     * segun el entero recibido como parametro.
      * @param estado
      */
     public void set_estado(int estado) {
