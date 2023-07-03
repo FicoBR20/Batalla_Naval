@@ -332,6 +332,7 @@ public class Armamento {
      * Metodo constructor
      */
     public Armamento(){
+        sitio_proa = new Point();
         sitio_proa.setLocation(0,0);
         nombre_Arma = " ";
         fuselaje=null;
