@@ -1,6 +1,6 @@
 package controlador;
 
-import Modelo.Tablero;
+import modelo.Tablero;
 import vista.FondoPanel;
 import vista.GUI_basica;
 
