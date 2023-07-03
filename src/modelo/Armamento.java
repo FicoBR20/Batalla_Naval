@@ -55,7 +55,7 @@ public class Armamento {
     private int espacio_libre;
 
     /**
-     * Metodo que representa el impacto recibido
+     * Atributo que representa el impacto recibido
      * por una nave en una parte de su carroceria.
      */
     private int impactada;
