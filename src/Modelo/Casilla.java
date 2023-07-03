@@ -9,6 +9,8 @@ public class Casilla extends JButton {
     private  int estado;
     private  int turno;
     private int fila;
+    private int tamaño;
+    private String orientacion;
     private int columna;
     private ImageIcon imageIcon;
 
@@ -24,40 +26,48 @@ public class Casilla extends JButton {
     }
 
     public void iniciar() {
-//        estado = 1;
         turno = 1;
         this.setPreferredSize(new Dimension(40,40));
-        es_agua();
+        agua();
     }
 
-    public void es_agua() {
+    /**
+     * Estados
+     */
+    public void limite() {
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/limite.png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+    }
+
+    public void agua() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
-    public void lock() {
+    public void bloque() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/coordenadas.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
-    public void es_trampa() {
-;
+    public void flota(int tamaño, int cuerpo, String orientacion) {
+            imageIcon = new ImageIcon(getClass().getResource("/recursos/flotas/"+orientacion+"/"+tamaño+cuerpo+".png"));
+            this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
-    public void es_flota() {
-        this.setBackground(new Color(0xFF0D407B, true));
+    public void flota_derribada(int tamaño, int cuerpo, String orientacion) {
+        imageIcon = new ImageIcon(getClass().getResource("/recursos/flotas_derribada/"+orientacion+"/"+tamaño+cuerpo+".png"));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
-    public void esta_tocado() {
+    public void tocado() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/tocado.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
     }
 
-    private void cayo_al_agua() {
+    public void equis() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/equis.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
         cambia_turno();
-        this.setBackground(new Color(0x000000));
     }
 
     public void cambia_turno() {
@@ -78,6 +88,13 @@ public class Casilla extends JButton {
         this.estado = estado;
     }
 
+    public void recoger_datos(int fila, int columna, String orientacion, int tamaño) {
+        this.fila = fila;
+        this.columna = columna;
+        this.orientacion = orientacion;
+        this.tamaño = tamaño;
+    }
+
     public void set_fila_columna(int fila, int columna) {
         this.fila = fila;
         this.columna = columna;
@@ -93,8 +110,15 @@ public class Casilla extends JButton {
         return letra2;
     }
 
+    public int getColumna_int() {
+        return columna;
+    }
+
     public void cambia_estado() {
-        if (estado == 1){
+        if (estado == 0){
+            estado = 2;
+
+        } else if (estado == 1){
             estado = 2;
         }
         else if (estado == 2){
@@ -112,24 +136,32 @@ public class Casilla extends JButton {
         poner_animacion();
     }
 
-    private void poner_animacion() {
+    public void poner_animacion() {
         switch (estado){
+            case 0->{
+                limite();
+            }
             case 1->{
-                es_agua();
+                agua();
             }
             case 2->{
-                cayo_al_agua();
+                equis();
             }
             case 3->{
-                esta_tocado();
+                tocado();
             }
             case 4->{
-                es_flota();
-            }
-            case 5->{
-                es_trampa();
+//                limite();
             }
         }
     }
 
+
+    public int get_tamaño() {
+        return  tamaño;
+    }
+
+    public String get_orientacion() {
+        return  orientacion;
+    }
 }
