@@ -9,7 +9,15 @@ import java.awt.event.ActionListener;
 
 public class Tablero extends FondoPanel {
 
+    /**
+     * Atributo que corresponde a un arreglo
+     * bidiemensional de tipo Casilla.
+     */
     private  Casilla[][] casilla;
+    /**
+     * Atributo de la  clase privada Escucha
+     * que implementa el ActionLIstener.
+     */
     private Escucha escucha;
 
     public Tablero() {
@@ -18,12 +26,17 @@ public class Tablero extends FondoPanel {
         this.setLayout(gridBagLayout);
         this.setPreferredSize(new Dimension(500,500));
         this.setBackground(new Color(0xF192C8));
-        set_tablero();
+        set_tablero(); // configuracion inicial de los JButtons
         ubicar_flota_persona();
 //        bloquear_rejilla();
 //        tablero_random();
     }
 
+    /**
+     * Metodo que configura el estado inicial de
+     * la cuadricula, compuesta por objetos tipo
+     * Casilla los cuales extienden JButtons.
+     */
     private void set_tablero() {
         GridBagConstraints gbc = new GridBagConstraints();
         casilla = new Casilla[11][11];
@@ -57,12 +70,24 @@ public class Tablero extends FondoPanel {
         casilla[0][0].setText("");
     }
 
+    /**
+     * Metodo alternativo para ubicar una "flota" o
+     * un conjunto de Naves de combate.
+     */
     private void ubicar_flota_persona() {
         rellenar(1,1,"v",4);
         rellenar(3,3,"h",3);
         rellenar(2,8,"h",3);
     }
 
+    /**
+     * Metodo alternativo para ubicacion de una nave en el
+     * campo de batalla
+     * @param fila
+     * @param columna
+     * @param orientacion
+     * @param tamaño
+     */
     private void rellenar(int fila, int columna, String orientacion, int tamaño) {
         if (orientacion == "v"){
             if (fila <= 11 - tamaño ){
@@ -87,12 +112,24 @@ public class Tablero extends FondoPanel {
         }
     }
 
+    /**
+     * Metodo que desabilita el tablero.
+     * setEnable(false).
+     */
     private void bloquear_rejilla() {
     }
 
+    /**
+     * Metodo que configura la flota del
+     * jugador Random.
+     */
     private void tablero_random() {
     }
 
+    /**
+     * Clase privada que configura la escucha
+     * mediante la implementacion del Action listener.
+     */
     public class Escucha implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {

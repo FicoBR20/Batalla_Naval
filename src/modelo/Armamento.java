@@ -10,8 +10,6 @@ import java.util.LinkedList;
  */
 public class Armamento {
 
-    //========================================================================== ATRIBUTOS DE LA CLASE==================
-
     /**
      * atributo que representa la coordenada
      * x,y de la proa de una nave o cualquier
@@ -72,6 +70,19 @@ public class Armamento {
      * segun el porcentaje de TOCADOS que reciba.
      */
     private Boolean nave_Hundida;
+
+    /**
+     * atributo que representa la cantidad de
+     * casillas ocupadas por la nave en el sentido
+     * del eje X osea HORIZONTALMENTE
+     */
+    private int espacio_ocupado_X;
+
+    /**
+     * atributo que representa la cantidad de
+     * casillas ocupadas por la nave en el sentido
+     * del eje Y osea VERTICALMENTE
+     */private int espacio_ocupado_Y;
 
     //======================================================================= METODOS DE LA CLASE====================
 
@@ -179,10 +190,9 @@ public class Armamento {
     /**
      * Metodo que asigna el espacio minimo que debe
      * existir entre las naves
-     * @param espacio_libre
      */
-    public void setEspacio_libre(int espacio_libre) {
-        this.espacio_libre = espacio_libre;
+    public void setEspacio_libre() {
+        espacio_libre=1;
     }
 
     /**
@@ -251,6 +261,72 @@ public class Armamento {
         }
     }
 
+    /**
+     * Metodo que entrega la likedlist fuselaje
+     * @return
+     */
+    public LinkedList<Object> getFuselaje() {
+        return fuselaje;
+    }
+
+    /**
+     * Metodo que configura la linkedlist fuselaje
+     * contiene 6 atributos de la clase distribuidos
+     * en 6 campos.
+     */
+    public void setFuselaje() {
+        fuselaje.add(sitio_proa);// campo [0]
+        fuselaje.add(nombre_Arma);// campo[1]
+        fuselaje.add(carroceria);// campo[2]
+        fuselaje.add(is_rotate);// campo[3]
+        fuselaje.add(icono_asociado);// campo[4]
+        fuselaje.add(espacio_libre);// campo[5]
+
+    }
+
+    /**
+     * Metodo que entrega el espacio ocupado en X -> HORIZONTALMENTE
+     * por una nave.
+     * @return
+     */
+    public int getEspacio_ocupado_X() {
+        return espacio_ocupado_X;
+    }
+
+    /**
+     * Metodo que configura el espacio ocupado
+     * en X -> HORIZONTALMENTE por una nave.
+     */
+    public void setEspacio_ocupado_X() {
+        if (is_rotate==true){
+            espacio_ocupado_X=1;
+        }
+        else {
+            espacio_ocupado_X=carroceria.size();
+        }
+    }
+
+    /**
+     * Metodo que entrega el espacio ocupado en Y -> VERTICALMENTE
+     * por una nave.
+     * @return
+     */public int getEspacio_ocupado_Y() {
+        return espacio_ocupado_Y;
+    }
+
+    /**
+     * Metodo que configura el espacio ocupado
+     * en Y -> VERTICALMENTE por una nave.
+     */
+    public void setEspacio_ocupado_Y() {
+        if (is_rotate==true){
+            espacio_ocupado_Y=carroceria.size();
+        }
+        else {
+            espacio_ocupado_Y=1;
+        }
+    }
+
     //========================================================================METODO CONSTRUCTOR=============
     /**
      * Metodo constructor
@@ -267,5 +343,8 @@ public class Armamento {
         nivel_de_impactos=100.0;
         nave_Hundida = false;
 
+    }
+    public Armamento(String nombre_Nave){
+        this.nombre_Arma=nombre_Nave;
     }
 }

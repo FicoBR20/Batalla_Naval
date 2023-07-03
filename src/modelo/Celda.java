@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,23 +8,26 @@ import java.awt.*;
  * Clase que configura el JButton
  * que se usara en la Clase Tablero
  */
-public class Casilla extends JButton {
+public class Celda extends JButton {
 
     /**
      * Atributo usado para la asignacion especifica de
      * una imagen a un objeto de tipo Casilla
      */
     private  int estado;
-    private  int turno;
-    private int fila;
-    private int columna;
+
+    /**
+     * Atributo que representa la imagen
+     * definida por el valor del atributo
+     * estado.
+     */
     private ImageIcon imageIcon;
 
     /**
      * Metodo constructor que configura
      * los atributos iniciales de un JButton
      */
-    public Casilla() {
+    public Celda() {
 
         this.setBackground(null);
 //        this.setContentAreaFilled(false);
@@ -35,11 +38,14 @@ public class Casilla extends JButton {
         iniciar();
     }
 
+    /**
+     * Metodo que inicializa la variable estado
+     * y configura el size de una celda.
+     * Metodo presente en el constructor de la clase.
+     */
     public void iniciar() {
-//        estado = 1;
-        turno = 1;
+        estado = 1;// Semantica -> es Agua
         this.setPreferredSize(new Dimension(40,40));
-        es_agua();
     }
 
     /**
@@ -53,15 +59,13 @@ public class Casilla extends JButton {
 
     /**+
      * Metodo que asigna la imagen del recuadro a un
-     * JButton
+     * JButton ubicado en los margenes asi:
+     * Ubicacion TOP -> JButtons con las letras de las Columnas
+     * Ubicacion lEFT -> JButtons con los numeros de las filas.
      */
-    public void lock() {
+    public void recuadro_Decorativo() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/coordenadas.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
-    }
-
-    public void es_trampa() {
-;
     }
 
     /**
@@ -88,22 +92,9 @@ public class Casilla extends JButton {
     private void cayo_al_agua() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/equis.png"));
         this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
-        cambia_turno();
         this.setBackground(new Color(0x000000));
     }
 
-    /**
-     * Metodo que modifica el atributo turno
-     * entre los valores 1 y 2.
-     */
-    public void cambia_turno() {
-        if (turno == 1){
-            turno = 2;
-        }
-        else if (turno == 2){
-            turno = 1;
-        }
-    }
 
 
     /**
@@ -125,59 +116,20 @@ public class Casilla extends JButton {
         this.estado = estado;
     }
 
-    /**
-     * metodo que actualiza los atributos
-     * fila y columna.
-     * @param fila
-     * @param columna
-     */
-    public void set_fila_columna(int fila, int columna) {
-        this.fila = fila;
-        this.columna = columna;
-    }
 
-    /**
-     * metodo que entrega el valor del
-     * atributo fila.
-     * @return
-     */
-    public int getFila() {
-        return fila;
-    }
 
     /**
      * Metodo que retorna un String correspondiente
-     * a la letra de la columna segun su numero.
+     * a la letra de la columna segun su ubicacion
+     * consecutiva.
      * @return
      */
-    public String getColumna() {
-        char letra = (char) ((char)64+columna);
+    public String letra_Para_Columnas(int auxiliar) {
+        char letra = (char) ((char)64+auxiliar);
         String letra2 = String.valueOf(letra);
         return letra2;
     }
 
-    /**
-     * Metodo que actualiza el valor de la variable
-     * estado, asignando una imagen segun corresponda
-     */
-    public void cambia_estado() {
-        if (estado == 1){
-            estado = 2;
-        }
-        else if (estado == 2){
-            estado = 2;
-        }
-        else if (estado == 3){
-            estado = 3;
-        }
-        else if (estado == 4){
-            estado = 3;
-        }
-        else if (estado == 5){
-            estado = 5;
-        }
-        poner_animacion();
-    }
 
     /**
      * Metodo que asigna una imagen
@@ -189,16 +141,10 @@ public class Casilla extends JButton {
                 es_agua();
             }
             case 2->{
-                cayo_al_agua();
+                es_flota();
             }
             case 3->{
                 esta_tocado();
-            }
-            case 4->{
-                es_flota();
-            }
-            case 5->{
-                es_trampa();
             }
         }
     }
