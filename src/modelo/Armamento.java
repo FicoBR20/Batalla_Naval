@@ -10,8 +10,6 @@ import java.util.LinkedList;
  */
 public class Armamento {
 
-    //========================================================================== ATRIBUTOS DE LA CLASE==================
-
     /**
      * atributo que representa la coordenada
      * x,y de la proa de una nave o cualquier
