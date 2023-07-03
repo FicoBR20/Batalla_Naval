@@ -75,6 +75,7 @@ public class GUI extends JFrame {
         this.add(headerProject,BorderLayout.NORTH);
         this.add(jButton_Next, BorderLayout.SOUTH);
         this.add(jPanel_Inicio, BorderLayout.CENTER);
+
     }
 
     /**
