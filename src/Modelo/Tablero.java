@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import vista.FondoPanel;
 
@@ -10,7 +10,7 @@ import java.util.Random;
 
 public class Tablero extends FondoPanel {
 
-    private  Casilla[][] casilla;
+    private  Modelo.Casilla[][] casilla;
     private Escucha escucha;
     private int matris;
     private int daño;
@@ -18,7 +18,7 @@ public class Tablero extends FondoPanel {
     public Tablero() {
         matris = 12;
         daño = 0;
-        casilla = new Casilla[matris][matris];
+        casilla = new Modelo.Casilla[matris][matris];
         set_ruta_fondo("/recursos/fondo.png");
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
@@ -42,7 +42,7 @@ public class Tablero extends FondoPanel {
 
         for (int i = 0; i < matris; i++) {
             for (int j = 0; j < matris; j++) {
-                casilla[i][j] = new Casilla();
+                casilla[i][j] = new Modelo.Casilla();
                 casilla[i][j].set_estado(1);
                 casilla[i][j].addActionListener(escucha);
                 //nota set de datos de la casilla
