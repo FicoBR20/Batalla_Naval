@@ -1,4 +1,4 @@
-package Modelo;
+package modelo;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,6 +13,7 @@ public class Casilla extends JButton {
     private String orientacion;
     private int columna;
     private ImageIcon imageIcon;
+    private int W_H;
 
     public Casilla() {
 
@@ -27,7 +28,8 @@ public class Casilla extends JButton {
 
     public void iniciar() {
         turno = 1;
-        this.setPreferredSize(new Dimension(40,40));
+        W_H = 28;
+        this.setPreferredSize(new Dimension(W_H,W_H));
         agua();
     }
 
@@ -36,37 +38,37 @@ public class Casilla extends JButton {
      */
     public void limite() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/limite.png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void agua() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/agua.png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void bloque() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/coordenadas.png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void flota(int tamaño, int cuerpo, String orientacion) {
             imageIcon = new ImageIcon(getClass().getResource("/recursos/flotas/"+orientacion+"/"+tamaño+cuerpo+".png"));
-            this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+            this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void flota_derribada(int tamaño, int cuerpo, String orientacion) {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/flotas_derribada/"+orientacion+"/"+tamaño+cuerpo+".png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void tocado() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/tocado.png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
     }
 
     public void equis() {
         imageIcon = new ImageIcon(getClass().getResource("/recursos/equis.png"));
-        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH)));
+        this.setIcon(new ImageIcon(imageIcon.getImage().getScaledInstance(W_H,W_H,Image.SCALE_SMOOTH)));
         cambia_turno();
     }
 
@@ -164,4 +166,6 @@ public class Casilla extends JButton {
     public String get_orientacion() {
         return  orientacion;
     }
+
+
 }

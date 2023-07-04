@@ -1,32 +1,38 @@
 package modelo;
 
+import Control.Alinear;
 import vista.FondoPanel;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
+import java.awt.event.*;
 import java.util.Random;
 
 public class Tablero extends FondoPanel {
 
-    private  Modelo.Casilla[][] casilla;
+    private  modelo.Casilla[][] casilla;
     private Escucha escucha;
     private int matris;
     private int daño;
+    private int estado_tablero;
+    private int tamaño;
+    private String orientacion;
 
     public Tablero() {
+        escucha = new Escucha();
+        tamaño =3;
+        estado_tablero = 1;
         matris = 12;
         daño = 0;
-        casilla = new Modelo.Casilla[matris][matris];
+        casilla = new modelo.Casilla[matris][matris];
         set_ruta_fondo("/recursos/fondo.png");
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
-        this.setPreferredSize(new Dimension(500,500));
+        this.setPreferredSize(new Dimension(350,350));
         this.setBackground(new Color(0xF192C8));
         dibujar_tablero();
-//        tablero_random();
-        ubicar_flota_persona();
+        tablero_random();
+//        ubicar_flota_persona();
         dibijar_bloques();
 //        bloquear_rejilla();
     }
@@ -38,13 +44,14 @@ public class Tablero extends FondoPanel {
     public void dibujar_tablero() {
         GridBagConstraints gbc = new GridBagConstraints();
 
-        escucha = new Escucha();
+
 
         for (int i = 0; i < matris; i++) {
             for (int j = 0; j < matris; j++) {
-                casilla[i][j] = new Modelo.Casilla();
+                casilla[i][j] = new modelo.Casilla();
                 casilla[i][j].set_estado(1);
                 casilla[i][j].addActionListener(escucha);
+                casilla[i][j].addMouseListener(escucha);
                 //nota set de datos de la casilla
 //                casilla[i][j].set_fila_columna(j,i);
                 casilla[i][j].recoger_datos(j,i,"",0);
@@ -343,20 +350,67 @@ public class Tablero extends FondoPanel {
         }
     }
 
-    public class Escucha implements ActionListener {
+    public void sest_tamaño_HV(int tamaño, String orientacion) {
+        this.tamaño=tamaño;
+        this.orientacion=orientacion;
+    }
+
+    public class Escucha implements ActionListener, MouseListener {
+
+
         @Override
         public void actionPerformed(ActionEvent e) {
+        }
 
-            for (int i = 0; i < matris; i++) {
-                for (int j = 0; j < matris; j++) {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+            //Estado "0" el tablero permite setear las casillas
+            if (estado_tablero == 0){
+                for (int i = 0; i < matris; i++) {
+                    for (int j = 0; j < matris; j++) {
 
-                    if (e.getSource()==casilla[i][j]){
-                        //Obtengo la coordenada completa de la flota
-                        int f = casilla[i][j].getFila();
-                        int c = casilla[i][j].getColumna_int();
-                        String o = casilla[i][j].get_orientacion();
-                        int t = casilla[i][j].get_tamaño();
+                        if (e.getSource()==casilla[i][j]){
+                            //Obtengo la coordenada completa de la flota
+                            int f = casilla[i][j].getFila();
+                            int c = casilla[i][j].getColumna_int();
+                            String o = casilla[i][j].get_orientacion();
+                            int t = casilla[i][j].get_tamaño();
 
+                        JOptionPane.showMessageDialog(null,
+                                "tocado "+
+                                        "\nFila "+
+                                        casilla[i][j].getFila()+
+                                        "\nColumna "+
+                                        casilla[i][j].getColumna()+
+                                        "\nEstado de la casilla "+
+                                        casilla[i][j].get_estado()+
+                                        "\nTamaño "+
+                                        casilla[i][j].get_tamaño()+
+                                        "\nOrientacion "+
+                                        casilla[i][j].get_orientacion());
+
+                            rellenar_flota(j,i,orientacion,tamaño);
+                            destruido(f,c,o,t);
+                            dibijar_bloques();
+
+                        }
+                        else if (e.getSource() == casilla[0][0]){
+
+                        }
+                    }
+                }
+            }
+            //Estado "1" el tablero permite jugar
+            else if (estado_tablero == 1){
+                for (int i = 0; i < matris; i++) {
+                    for (int j = 0; j < matris; j++) {
+
+                        if (e.getSource()==casilla[i][j]){
+                            //Obtengo la coordenada completa de la flota
+                            int f = casilla[i][j].getFila();
+                            int c = casilla[i][j].getColumna_int();
+                            String o = casilla[i][j].get_orientacion();
+                            int t = tamaño;
 
 //                        JOptionPane.showMessageDialog(null,
 //                                "tocado "+
@@ -371,17 +425,73 @@ public class Tablero extends FondoPanel {
 //                                        "\nOrientacion "+
 //                                        casilla[i][j].get_orientacion());
 
-                        casilla[i][j].cambia_estado();
-                        destruido(f,c,o,t);
+                            casilla[i][j].cambia_estado();
+                            destruido(f,c,o,t);
 
 
+                        }
+                        else if (e.getSource() == casilla[0][0]){
+
+                        }
                     }
-                    else if (e.getSource() == casilla[0][0]){
+                }
+            }
+
+        }
+
+        @Override
+        public void mousePressed(MouseEvent e) {
+
+        }
+
+        @Override
+        public void mouseReleased(MouseEvent e) {
+        }
+
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            for (int i = 1; i < matris-1; i++) {
+                for (int j = 1; j < matris-1; j++) {
+                    //Sombrea la casilla cuyo estado es (0) osea agua
+                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 && j < matris - tamaño){
+                        //Rellena con el tamaño de lanflota
+                        for (int k = 0; k < tamaño; k++) {
+                            //si se topa con algo que no sea flota no lo sombrea
+                            if ( casilla[i][j+k].get_estado()==1 && orientacion == "V"){
+                                casilla[i][j+k].limite();
+                            }
+                            else if ( casilla[i+k][j].get_estado()==1 && orientacion == "H"){
+                                casilla[i+k][j].limite();
+                            }
+                        }
 
                     }
                 }
             }
         }
+
+        @Override
+        public void mouseExited(MouseEvent e) {
+            for (int i = 1; i < matris-1; i++) {
+                for (int j = 1; j < matris-1; j++) {
+                    //Dessombrea la casilla cuyo estado es (1) osea agua
+                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 && j < matris - tamaño){
+                        //Rellena con el tamaño de lanflota
+                        for (int k = 0; k < tamaño; k++) {
+                            //si se topa con algo que no sea agua no lo dessombrea
+                            if ( casilla[i][j+k].get_estado()==1 && orientacion == "V"){
+                                casilla[i][j+k].agua();
+                            }
+                            else if ( casilla[i+k][j].get_estado()==1 && orientacion == "H"){
+                                casilla[i+k][j].agua();
+                            }
+                        }
+
+                    }
+                }
+            }
+        }
+
     }
 
 
