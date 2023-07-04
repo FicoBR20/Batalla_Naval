@@ -1,6 +1,6 @@
 package controlador;
 
-import modelo.Armamento;
+import Modelo.Armamento;
 import vista.GUI_pF;
 
 import java.awt.*;
