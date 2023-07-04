@@ -1,4 +1,4 @@
-package modelo;
+package Modelo;
 
 import javax.swing.*;
 import java.awt.*;

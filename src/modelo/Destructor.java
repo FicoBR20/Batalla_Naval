@@ -1,4 +1,4 @@
-package modelo;
+package Modelo;
 
 /**
  * Clase que configura la nave
