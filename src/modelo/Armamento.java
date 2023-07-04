@@ -17,7 +17,11 @@ public class Armamento {
      * La ubicacion debe estar asociada al grid del Tablero
      * tomando en cuenta la medida de cada fila y columna
      */
-    private Point sitio_proa;
+    private Point sitio_proa; //TODO cambiar por un atributo (int, string/char)
+
+    private Coordenada proa_Nave; // (int, char)
+
+    //TODO ..Clase Point (x,y) piceles en el Frame.
     /**
      * atributo que asigna un nombre
      * a un tipo de nave de combate o
