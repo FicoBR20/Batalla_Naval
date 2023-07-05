@@ -164,4 +164,6 @@ public class Casilla extends JButton {
     public String get_orientacion() {
         return  orientacion;
     }
+
+
 }
