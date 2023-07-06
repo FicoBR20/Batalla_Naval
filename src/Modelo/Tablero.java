@@ -1,6 +1,9 @@
 package Modelo;
 
+import modelo.Coordenada;
 import vista.FondoPanel;
+import modelo.Armamento;
+import modelo.Coordenada;
 
 import javax.swing.*;
 import java.awt.*;
@@ -8,6 +11,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Tablero extends FondoPanel {
+
+    private Coordenada coordenada;
+
+    private Armamento armamento;
 
     /**
      * Atributo que corresponde a un arreglo
@@ -21,6 +28,8 @@ public class Tablero extends FondoPanel {
     private Escucha escucha;
 
     public Tablero() {
+        coordenada=new Coordenada();
+        armamento = new Armamento();
         set_ruta_fondo("/recursos/fondo.png");
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
@@ -70,6 +79,18 @@ public class Tablero extends FondoPanel {
         casilla[0][0].setText("");
     }
 
+    private void re_ubicar_Flota(){
+        armamento.setNombre_Arma("PortaAviones");
+        coordenada.setFila_campo(1);
+        coordenada.setColumna_campo("A");
+        armamento.setProa_Nave(coordenada);//Bomper del Barco
+        armamento.setIs_rotate();//va girado.
+
+
+
+
+    }
+
     /**
      * Metodo alternativo para ubicar una "flota" o
      * un conjunto de Naves de combate.
@@ -79,6 +100,7 @@ public class Tablero extends FondoPanel {
         rellenar(3,3,"h",3);
         rellenar(2,8,"h",3);
     }
+
 
     /**
      * Metodo alternativo para ubicacion de una nave en el

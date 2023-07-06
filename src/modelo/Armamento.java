@@ -19,7 +19,7 @@ public class Armamento {
      */
     private Point sitio_proa; //TODO cambiar por un atributo (int, string/char)
 
-    private Coordenada proa_Nave; // (int, char)
+    private Coordenada proa_Nave; // (int, String)
 
     //TODO ..Clase Point (x,y) piceles en el Frame.
     /**
@@ -33,7 +33,7 @@ public class Armamento {
      * naves de combate y entes.
      * recepciona los atributos.
      */
-    private LinkedList<Object>fuselaje;
+    private ArrayList<Object>fuselaje;
     /**
      * atributo que determina la configuracion
      * de una nave de combate    asi;
@@ -266,25 +266,25 @@ public class Armamento {
     }
 
     /**
-     * Metodo que entrega la likedlist fuselaje
+     * Metodo que entrega el Arraylist fuselaje
      * @return
      */
-    public LinkedList<Object> getFuselaje() {
+    public ArrayList<Object> getFuselaje() {
         return fuselaje;
     }
 
     /**
-     * Metodo que configura la linkedlist fuselaje
+     * Metodo que configura el Arraylist fuselaje
      * contiene 6 atributos de la clase distribuidos
      * en 6 campos.
      */
     public void setFuselaje() {
-        fuselaje.add(sitio_proa);// campo [0]
-        fuselaje.add(nombre_Arma);// campo[1]
-        fuselaje.add(carroceria);// campo[2]
-        fuselaje.add(is_rotate);// campo[3]
-        fuselaje.add(icono_asociado);// campo[4]
-        fuselaje.add(espacio_libre);// campo[5]
+        fuselaje.add(nombre_Arma);// campo[0]
+        // fuselaje.add(sitio_proa);// campo [0]
+       // fuselaje.add(carroceria);// campo[2]
+       // fuselaje.add(is_rotate);// campo[3]
+        //fuselaje.add(icono_asociado);// campo[4]
+        //fuselaje.add(espacio_libre);// campo[5]
 
     }
 
@@ -329,6 +329,22 @@ public class Armamento {
         else {
             espacio_ocupado_Y=1;
         }
+    }
+
+    /**
+     * Metodo que entrega una coordenada del tablero
+     * @return
+     */
+    public Coordenada getProa_Nave() {
+        return proa_Nave;
+    }
+
+    /**
+     * Metodo que configura una coordenada del tablero
+     * @param proa_Nave
+     */
+    public void setProa_Nave(Coordenada proa_Nave) {
+        this.proa_Nave = proa_Nave;
     }
 
     //========================================================================METODO CONSTRUCTOR=============
