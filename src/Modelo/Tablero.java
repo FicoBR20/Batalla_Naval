@@ -10,12 +10,21 @@ import java.util.Random;
 
 public class Tablero extends FondoPanel {
 
+    /**
+     * Array de Jbuttons tipo Casilla
+     */
     private  modelo.Casilla[][] casilla;
     private Escucha escucha;
     private int matris;
     private int daño;
     private int estado_tablero;
+    /**
+     * cantidad de cuadritos de la nave
+     */
     private int tamaño;
+    /**
+     * sera V o H lo define un random
+     */
     private String orientacion;
 
     public Tablero() {
@@ -191,7 +200,7 @@ public class Tablero extends FondoPanel {
         set_flota( fila,  columna,  orientacion,  tamaño);
     }
 
-    public void limite_flota(int fila, int columna, String orientacion, int tamaño) {
+    public void limite_flota(int fila, int columna, String orientacion, int tamaño) {//tamano[1,2,3,4]
         if (orientacion == "V"){
             if (fila <= matris - tamaño ){
                 columna--;
@@ -320,13 +329,13 @@ public class Tablero extends FondoPanel {
     }
 
     public void tablero_random() {
-        for (int i = 0; i < matris; i++) {
+        for (int i = 0; i < matris; i++) { //TODO Preguntarle a Arley que semantica tiene matrix
             Random random = new Random();
-            int fila = random.nextInt(1,11);
+            int fila = random.nextInt(1,11);//detrmina fila
             random = new Random();
-            int columna = random.nextInt(1,11);
+            int columna = random.nextInt(1,11);// determina Columna
             random = new Random();
-            int aleatorio = random.nextInt(1,10);
+            int aleatorio = random.nextInt(1,10);// determina el giro de la nave
             String orientacion = "";
             if (aleatorio%2 == 1){
                 orientacion = "H";
@@ -335,17 +344,17 @@ public class Tablero extends FondoPanel {
                 orientacion = "V";
             }
 
-            if (i<4) {
-                rellenar_flota(fila,columna,orientacion,1);
+            if (i<4) {//TODO...como interpretar esta restricion
+                rellenar_flota(fila,columna,orientacion,1);//las fragatas
             }
             else if (i < 7) {
-                rellenar_flota(fila,columna,orientacion,2);
+                rellenar_flota(fila,columna,orientacion,2);//destructores
             }
             else if (i < 10) {
-                rellenar_flota(fila,columna,orientacion,3);
+                rellenar_flota(fila,columna,orientacion,3);//submarinos
             }
             else if (i < 11) {
-                rellenar_flota(fila,columna,orientacion,4);
+                rellenar_flota(fila,columna,orientacion,4);//portaaviones
             }
         }
     }
