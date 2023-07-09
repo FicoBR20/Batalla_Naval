@@ -1,6 +1,5 @@
 package modelo;
 
-import java.awt.*;
 import java.util.ArrayList;
 
 /**
@@ -30,7 +29,7 @@ public class Armamento {
     /**
      * atributo que determina la configuracion
      * de una nave de combate    asi;
-     * 0 -> es agua
+     * 0 -> es agua...por ahora no se usara.
      * 1 -> es metal
      * ejemplo: [1,1,1] es el submarino
      */
@@ -53,9 +52,10 @@ public class Armamento {
 
     /**
      * Atributo que representa el impacto recibido
-     * por una nave en una parte de su carroceria.
+     * por una nave.
+     * Acumulara 1 por cada impacto
      */
-    private int impactada;
+    private double impactada;
     /**
      * atributo que determina el limite de supervivencia
      * de una nave, el default es 100% se impactaron toda la nave
@@ -114,7 +114,7 @@ public class Armamento {
      * tomando como parametro la cantidad de celdas
      * @param celdas_X
      */
-    public void setCarroceria_Basica(int celdas_X) {//TODO SE PUEDE PLANTEAR UN ARRAY DE POINTS.
+    public void setCarroceria_Basica(int celdas_X) {
 
         for (int i = 0; i < celdas_X; i++) {
             carroceria.add(1); // 1 -> Semantica es METAL osea, NO es AGUA.
@@ -185,19 +185,15 @@ public class Armamento {
     /**
      * Metodo que calcula el porcentaje de impactos
      * recibida por una nave, basandose en la cantidad
-     * de casillas TOCADAS.
+     * de casillas TOCADAS que se acumulan en la variable
+     * impactada
      */
-    public void setNivel_de_impactos() {//TODO SE DEBE VERIFICAR ESTE METODO, CREO QUE ES MEJOR CON POINTS EN EL ARRAY.
-        int auxiliar=0;
-        for (int i = 0; i < carroceria.size(); i++) {
-            if (carroceria.get(i)==3){
-                auxiliar++;
-            }
-        }
-        nivel_de_impactos = carroceria.size()/auxiliar;
+    public void setNivel_de_impactos() {
+
+        nivel_de_impactos = impactada/carroceria.size();
     }
 
-    public int getImpactada() {
+    public double getImpactada() {
         return impactada;
     }
 
@@ -207,16 +203,16 @@ public class Armamento {
      * que La nave fue TOCADA por el rival.
      * @param sito_del_disparo
      */
-    public void setImpactada(Point sito_del_disparo) {
+    public void setImpactada(Coordenada sito_del_disparo) {
 
         for (int i = 0; i < carroceria.size(); i++) {
             if (carroceria.contains(sito_del_disparo)){
-                carroceria.set(i, 3);//semantica 3 -> simboliza que fue impactado
+                impactada+=1.0;
+                System.out.println("..en setImpactada..van..cantidad de impactos.." + ((int) impactada));
             }
 
         }
 
-        this.impactada = impactada;
     }
 
     /**
@@ -234,7 +230,7 @@ public class Armamento {
      * segun el porcentaje del nievl de impacto (TOCADOS)
      */
     public void setNave_Hundida() {
-        if (nivel_de_impactos==100.0){
+        if (nivel_de_impactos==1.0){
             nave_Hundida=true;
         }
     }
@@ -305,36 +301,19 @@ public class Armamento {
         }
     }
 
-    /**
-     * Metodo que entrega una coordenada del tablero
-     * @return
-     */
-    public Coordenada getProa_Nave() {
-        return proa_Nave;
-    }
-
-    /**
-     * Metodo que configura una coordenada del tablero
-     * @param proa_Nave
-     */
-    public void setProa_Nave(Coordenada proa_Nave) {
-        this.proa_Nave = proa_Nave;
-    }
-
     //========================================================================METODO CONSTRUCTOR=============
     /**
      * Metodo constructor
      */
     public Armamento(){
-        coord_proa = new Point();
-        coord_proa.setLocation(0,0);
+        coord_proa = new Coordenada();
         nombre_Arma = " ";
         fuselaje=null;
         carroceria=null;
         is_rotate=false;
         icono_asociado=99; // valor de inicializacion sin SEMANTICA
         espacio_libre=1;
-        impactada = 99; // valor de inicializacion sin SEMANTICA
+        impactada = 0; // la nave esta nueva no ha sido impactada
         nivel_de_impactos=100.0;
         nave_Hundida = false;
 
