@@ -3,7 +3,6 @@ package Modelo;
 import modelo.Coordenada;
 import vista.FondoPanel;
 import modelo.Armamento;
-import modelo.Coordenada;
 
 import javax.swing.*;
 import java.awt.*;
@@ -81,8 +80,8 @@ public class Tablero extends FondoPanel {
 
     private void re_ubicar_Flota(){
         armamento.setNombre_Arma("PortaAviones");
-        coordenada.setFila_campo(1);
-        coordenada.setColumna_campo("A");
+        coordenada.setNumero_Fila(1);
+        coordenada.setLetra_Columna("A");
         armamento.setProa_Nave(coordenada);//Bomper del Barco
         armamento.setIs_rotate();//va girado.
 
