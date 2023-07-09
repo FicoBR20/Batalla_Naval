@@ -26,15 +26,21 @@ public class Grid_escenario extends JPanel {
         celda = new Celda();
         celda.addActionListener(escucha);
 
+        generar_tendido();
+
 
         jP_central = new JPanel();
+        jP_central.add(generar_tendido(), BorderLayout.CENTER);
+
     }
 
-    public void generar_tendido(){
+    public JButton[][] generar_tendido(int datoX, int datoY){
 
-        for (int i = 0; i < 9; i++) {
+        JButton [] [] grilla_final = new JButton[datoX] [datoY];
+
+        for (int i = 0; i < datoX;i++) {
             new Celda().setText(String.valueOf(i+1));
-            for (int j = 0; j < 9; j++) {
+            for (int j = 0; j < datoY; j++){
                 new Celda().setText(String.valueOf(j+1));
             }
         }

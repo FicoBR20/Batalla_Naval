@@ -82,7 +82,7 @@ public class Tablero extends FondoPanel {
         armamento.setNombre_Arma("PortaAviones");
         coordenada.setNumero_Fila(1);
         coordenada.setLetra_Columna("A");
-        armamento.setProa_Nave(coordenada);//Bomper del Barco
+        //armamento.setProa_Nave(coordenada);//Bomper del Barco
         armamento.setIs_rotate();//va girado.
 
 

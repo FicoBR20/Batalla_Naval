@@ -1,5 +1,7 @@
 package vista;
 
+import modelo.Grid_escenario;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +13,10 @@ import java.awt.event.ActionListener;
  * @version v.1.0.0 date:21/03/2023
  */
 public class GUI_pF extends JFrame {
+
+    private JPanel jP_escenario;
+
+    private Grid_escenario grid_escenario;
 
     private JP_01_Info_Reglas_del_Juego jp01;
 
@@ -31,7 +37,7 @@ public class GUI_pF extends JFrame {
 
         //Default JFrame configuration
         this.setTitle("Batalla Naval");
-        this.setSize(600,400);
+        this.setSize(600,600);
         //this.pack();
         this.setResizable(false);
         this.setVisible(true);
@@ -47,6 +53,14 @@ public class GUI_pF extends JFrame {
 
         GridBagLayout gridBagLayout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
+
+        grid_escenario = new Grid_escenario();
+        jP_escenario = new JPanel();
+        jP_escenario.setSize(400,400);
+        jP_escenario.setPreferredSize(new Dimension(400,400));
+        jP_escenario.setBackground(Color.RED);
+        //jP_escenario.add(grid_escenario, BorderLayout.CENTER);
+
 
         jp01 = new JP_01_Info_Reglas_del_Juego();
         jp01.setVisible(true);
@@ -74,7 +88,7 @@ public class GUI_pF extends JFrame {
 
         this.add(headerProject,BorderLayout.NORTH);
         this.add(jButton_Next, BorderLayout.SOUTH);
-        this.add(jPanel_Inicio, BorderLayout.CENTER);
+        this.add(jP_escenario, BorderLayout.CENTER);
     }
 
     /**
@@ -113,16 +127,18 @@ public class GUI_pF extends JFrame {
 
             if (e.getSource()==jButton_Next){
 
+                jP_escenario.setBackground(Color.ORANGE);
 
 
-                jPanel_Inicio.setBackground(Color.CYAN);
-                jPanel_Inicio.add(jp01, BorderLayout.CENTER);
-                jButton_Next.setVisible(false);
+
+//                jPanel_Inicio.setBackground(Color.CYAN);
+//                jPanel_Inicio.add(jp01, BorderLayout.CENTER);
+//                jButton_Next.setVisible(false);
 
                // cambiarPaneles(jp01);
 
 
-                System.out.println(" estoy escuchando bien");
+                System.out.println(" ..domingo ok Gracias a Dios");
             }
 
         }
