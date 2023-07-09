@@ -1,6 +1,7 @@
 package modelo;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**
  * Clase que configura las neves y/o entes
@@ -25,7 +26,7 @@ public class Armamento {
      * naves de combate y entes.
      * recepciona los atributos.
      */
-    private ArrayList<Object>fuselaje;
+    private LinkedList<Object>fuselaje;
     /**
      * atributo que determina la configuracion
      * de una nave de combate    asi;
@@ -239,7 +240,7 @@ public class Armamento {
      * Metodo que entrega el Arraylist fuselaje
      * @return
      */
-    public ArrayList<Object> getFuselaje() {
+    public LinkedList<Object> getFuselaje() {
         return fuselaje;
     }
 
@@ -249,12 +250,16 @@ public class Armamento {
      * en 6 campos.
      */
     public void setFuselaje() {
-        fuselaje.add(nombre_Arma);// campo[0]
-        // fuselaje.add(coord_proa);// campo [0]
-       // fuselaje.add(carroceria);// campo[2]
-       // fuselaje.add(is_rotate);// campo[3]
-        //fuselaje.add(icono_asociado);// campo[4]
-        //fuselaje.add(espacio_libre);// campo[5]
+        fuselaje.add(getNombre_Arma());// campo[0]
+        fuselaje.add(coord_proa.getUbicacion_coordenada());// campo[1]
+        fuselaje.add(getIs_rotate());// campo[2]
+        fuselaje.add(getIcono_asociado());// campo[3]
+        fuselaje.add(getEspacio_libre());// campo[4]
+        fuselaje.add(getImpactada());// campo[5]
+        fuselaje.add(getNivel_de_impactos());// campo[6]
+        fuselaje.add(getNave_Hundida());// campo[7]
+        fuselaje.add(getEspacio_ocupado_X());// campo[8]
+        fuselaje.add(getEspacio_ocupado_Y());// campo[9]
 
     }
 
@@ -271,7 +276,8 @@ public class Armamento {
      * Metodo que configura el espacio ocupado
      * en X -> HORIZONTALMENTE por una nave.
      */
-    public void setEspacio_ocupado_X() {
+    public void setEspacio_ocupado_X() {//TODO...verificar probablemente este dato en x y Y no sea necesario.
+        //TODO...bastaria con configurar el array carroceria y usar el .size vertical y horizontalmente. fico.
         if (is_rotate==true){
             espacio_ocupado_X=1;
         }
