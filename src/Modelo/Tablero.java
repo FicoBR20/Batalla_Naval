@@ -21,7 +21,7 @@ public class Tablero extends FondoPanel {
     public Tablero() {
         escucha = new Escucha();
         tamaño =3;
-        estado_tablero = 1;
+        estado_tablero = 0;
         matris = 12;
         daño = 0;
         casilla = new modelo.Casilla[matris][matris];
@@ -30,8 +30,10 @@ public class Tablero extends FondoPanel {
         this.setLayout(gridBagLayout);
         this.setPreferredSize(new Dimension(350,350));
         this.setBackground(new Color(0xF192C8));
+        this.addKeyListener(escucha);
+        this.setFocusable(true);
         dibujar_tablero();
-        tablero_random();
+//        tablero_random();
 //        ubicar_flota_persona();
         dibijar_bloques();
 //        bloquear_rejilla();
@@ -43,9 +45,6 @@ public class Tablero extends FondoPanel {
 
     public void dibujar_tablero() {
         GridBagConstraints gbc = new GridBagConstraints();
-
-
-
         for (int i = 0; i < matris; i++) {
             for (int j = 0; j < matris; j++) {
                 casilla[i][j] = new modelo.Casilla();
@@ -100,7 +99,6 @@ public class Tablero extends FondoPanel {
         }
     }
 
-
     public void ubicar_flota_persona() {
         //Porta aviones
         rellenar_flota(1,1,"V",4);
@@ -120,7 +118,6 @@ public class Tablero extends FondoPanel {
         rellenar_flota(1,8,"H",1);
         rellenar_flota(7,9,"H",1);
     }
-
 
     /**
      * Este metodo llena la casillas del tablero con el tipo de flota
@@ -185,6 +182,7 @@ public class Tablero extends FondoPanel {
         }
 
     }
+
     public void rellenar_flota(int fila, int columna, String orientacion, int tamaño) {
         limite_flota( fila,  columna,  orientacion,  tamaño);
 //        destruido( fila,  columna,  orientacion,  tamaño);
@@ -355,7 +353,19 @@ public class Tablero extends FondoPanel {
         this.orientacion=orientacion;
     }
 
-    public class Escucha implements ActionListener, MouseListener {
+    public int get_estado() {
+        return estado_tablero;
+    }
+
+    public void set_estado(int estado_tablero) {
+        this.estado_tablero = estado_tablero;
+    }
+
+    public int get_tamaño() {
+        return  tamaño;
+    }
+
+    public class Escucha implements ActionListener, MouseListener,KeyListener {
 
 
         @Override
@@ -411,7 +421,6 @@ public class Tablero extends FondoPanel {
                             int c = casilla[i][j].getColumna_int();
                             String o = casilla[i][j].get_orientacion();
                             int t = tamaño;
-
 //                        JOptionPane.showMessageDialog(null,
 //                                "tocado "+
 //                                        "\nFila "+
@@ -424,7 +433,6 @@ public class Tablero extends FondoPanel {
 //                                        casilla[i][j].get_tamaño()+
 //                                        "\nOrientacion "+
 //                                        casilla[i][j].get_orientacion());
-
                             casilla[i][j].cambia_estado();
                             destruido(f,c,o,t);
 
@@ -453,18 +461,17 @@ public class Tablero extends FondoPanel {
             for (int i = 1; i < matris-1; i++) {
                 for (int j = 1; j < matris-1; j++) {
                     //Sombrea la casilla cuyo estado es (0) osea agua
-                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 && j < matris - tamaño){
+                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 ){
                         //Rellena con el tamaño de lanflota
                         for (int k = 0; k < tamaño; k++) {
                             //si se topa con algo que no sea flota no lo sombrea
-                            if ( casilla[i][j+k].get_estado()==1 && orientacion == "V"){
-                                casilla[i][j+k].limite();
+                            if ( orientacion == "V" && j < matris - tamaño){
+                                casilla[i][j+k].flota(tamaño,k,orientacion);
                             }
-                            else if ( casilla[i+k][j].get_estado()==1 && orientacion == "H"){
-                                casilla[i+k][j].limite();
+                            else if ( orientacion == "H" && i < matris - tamaño){
+                                casilla[i+k][j].flota(tamaño,k,orientacion);
                             }
                         }
-
                     }
                 }
             }
@@ -475,43 +482,42 @@ public class Tablero extends FondoPanel {
             for (int i = 1; i < matris-1; i++) {
                 for (int j = 1; j < matris-1; j++) {
                     //Dessombrea la casilla cuyo estado es (1) osea agua
-                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 && j < matris - tamaño){
+                    if (e.getSource()==casilla[i][j] && casilla[i][j].get_estado() == 1 ){
                         //Rellena con el tamaño de lanflota
                         for (int k = 0; k < tamaño; k++) {
-                            //si se topa con algo que no sea agua no lo dessombrea
-                            if ( casilla[i][j+k].get_estado()==1 && orientacion == "V"){
+                            //si se topa con algo que no sea flota no lo sombrea
+                            if ( orientacion == "V" && j < matris - tamaño){
                                 casilla[i][j+k].agua();
                             }
-                            else if ( casilla[i+k][j].get_estado()==1 && orientacion == "H"){
+                            else if ( orientacion == "H" && i < matris - tamaño){
                                 casilla[i+k][j].agua();
                             }
                         }
-
                     }
                 }
             }
         }
 
+        @Override
+        public void keyTyped(KeyEvent e) {
+            for (int i = 0; i < matris; i++) {
+                for (int j = 0; j < matris; j++) {
+
+                    if (e.getKeyChar()=='r'|| e.getKeyChar()=='R' ) {
+                        JOptionPane.showMessageDialog(null,"RD");
+                    }
+                }
+            }
+        }
+
+        @Override
+        public void keyPressed(KeyEvent e) {
+
+        }
+
+        @Override
+        public void keyReleased(KeyEvent e) {
+
+        }
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

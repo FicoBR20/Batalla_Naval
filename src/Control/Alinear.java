@@ -23,6 +23,7 @@ public class Alinear {
     private JButton boton_des;
     private JButton boton_frag;
     private JButton boton_orientacion;
+    private JButton boton_estado;
     private Escucha escucha;
     private String orientacion;
 
@@ -39,18 +40,21 @@ public class Alinear {
         boton_des = new JButton("Destructor");
         boton_frag = new JButton("Fragata");
         boton_orientacion = new JButton("Orientacion");
+        boton_estado = new JButton("Estado");
 
         boton_porta.addActionListener(escucha);
         boton_sub.addActionListener(escucha);
         boton_des.addActionListener(escucha);
         boton_frag.addActionListener(escucha);
         boton_orientacion.addActionListener(escucha);
+        boton_estado.addActionListener(escucha);
 
         pane_flota.add(boton_frag);
         pane_flota.add(boton_des);
         pane_flota.add(boton_sub);
         pane_flota.add(boton_porta);
         pane_flota.add(boton_orientacion);
+        pane_flota.add(boton_estado);
 
 
         gui = new GUI();
@@ -69,7 +73,7 @@ public class Alinear {
 
         gui.add(fondoPanel, BorderLayout.CENTER);
         gui.add(pane_flota, BorderLayout.SOUTH);
-        gui.setSize(new Dimension(500,450));
+        gui.setSize(new Dimension(800,450));
         gui.setVisible(true);
     }
 
@@ -105,9 +109,22 @@ public class Alinear {
             if (e.getSource() == boton_orientacion){
                 if (orientacion == "H"){
                     orientacion = "V";
+//                    JOptionPane.showMessageDialog(null,
+//                            "Orientacion ahora es "+orientacion+"ertical");
                 }
                 else if (orientacion == "V"){
                     orientacion = "H";
+//                    JOptionPane.showMessageDialog(null,
+//                            "Orientacion ahora es "+orientacion+"orizontal");
+                }
+                tablero.sest_tamaño_HV(tablero.get_tamaño(),orientacion);
+            }
+            if (e.getSource() == boton_estado){
+                if (tablero.get_estado() == 0){
+                    tablero.set_estado(1);
+                }
+                else if (tablero.get_estado() == 1){
+                    tablero.set_estado(0);
                 }
                 JOptionPane.showMessageDialog(null, "Orientacion ahora es "+orientacion);
             }
