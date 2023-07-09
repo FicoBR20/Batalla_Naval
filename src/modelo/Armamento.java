@@ -117,11 +117,20 @@ public class Armamento {
      */
     public void setCarroceria_Basica(int celdas_X) {
 
+        //[1.1.1] una nave
+        //TODO ...YA CONOZCO EL PUNTO FIJO..Y YA CONOZCO CUANTO MIDE EL ARRAY.
+        // TODO...el punto fijo viene dado por [int, int]
+
         if (is_rotate==true){
-            //TODO ...Aqui debo llamar a la cuadricula y asignarle un valor 1 o algo asi..
             for (int i = 0; i <(coord_proa.getNumero_Fila()+celdas_X-1); i++) {
-                coord_proa.setNumero_Fila(coord_proa.getNumero_Fila());//TODO...verificar esta instruccion
-                coord_proa.setNumero_Columna(coord_proa.getNumero_Columna());//TODO...verificar esta instruccion
+
+                // [ coorproa [fila, columna]=1;;
+                // [fila +1, columna]
+                // [fila +1, columna]...condicionde parada.
+                coord_proa.setUbicacion_coordenada(coord_proa.getNumero_Columna(),coord_proa.getNumero_Columna());
+
+                coord_proa.setNumero_Fila(coord_proa.getNumero_Fila());
+                coord_proa.setNumero_Columna(coord_proa.getNumero_Columna());
 
             }
         }

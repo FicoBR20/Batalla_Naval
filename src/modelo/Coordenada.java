@@ -9,6 +9,9 @@ import java.util.LinkedList;
  */
 public class Coordenada {
 
+    /**
+     * Coordenada [fila, columna]
+     */
     private LinkedList<Object> ubicacion_coordenada;
     /**
      * Atributo que se refiere a la fila
