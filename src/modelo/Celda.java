@@ -135,7 +135,7 @@ public class Celda extends JButton {
      * Metodo que asigna una imagen
      * segun el valor de la variable estado.
      */
-    private void poner_animacion() {
+    private void asignar_imagen() {
         switch (estado){
             case 1->{
                 es_agua();
