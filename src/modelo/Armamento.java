@@ -2,7 +2,6 @@ package modelo;
 
 import java.awt.*;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 /**
  * Clase que configura las neves y/o entes
@@ -11,17 +10,11 @@ import java.util.LinkedList;
 public class Armamento {
 
     /**
-     * atributo que representa la coordenada
-     * x,y de la proa de una nave o cualquier
-     * ente presente an la batalla.
-     * La ubicacion debe estar asociada al grid del Tablero
-     * tomando en cuenta la medida de cada fila y columna
-     */
-    private Point sitio_proa; //TODO cambiar por un atributo (int, string/char)
-
-    private Coordenada proa_Nave; // (int, String)
-
-    //TODO ..Clase Point (x,y) piceles en el Frame.
+     * Atributo que representa la coordenada
+     * [fila(int), columna(int / String)] de la parte delantera
+     * de una nave
+     *La columna se puede defiir con un entero o con un String*/
+    private Coordenada coord_proa;
     /**
      * atributo que asigna un nombre
      * a un tipo de nave de combate o
@@ -89,25 +82,6 @@ public class Armamento {
      */private int espacio_ocupado_Y;
 
     //======================================================================= METODOS DE LA CLASE====================
-
-    /**
-     * Metodo que retorna un objeto Point
-     * de cordenadas (x,y).
-     * @return
-     */
-    public Point getSitio_proa() {
-        return sitio_proa.getLocation();
-    }
-
-    /**
-     * Metodo que asigna los valores de las coordenadas
-     * a un objeto Point.
-     * @param varX
-     * @param varY
-     */
-    public void setSitio_proa(int varX,int varY) {
-        sitio_proa.setLocation(varX,varY);
-    }
 
     /**
      * Metodo que retorna el nombre de
@@ -280,7 +254,7 @@ public class Armamento {
      */
     public void setFuselaje() {
         fuselaje.add(nombre_Arma);// campo[0]
-        // fuselaje.add(sitio_proa);// campo [0]
+        // fuselaje.add(coord_proa);// campo [0]
        // fuselaje.add(carroceria);// campo[2]
        // fuselaje.add(is_rotate);// campo[3]
         //fuselaje.add(icono_asociado);// campo[4]
@@ -352,8 +326,8 @@ public class Armamento {
      * Metodo constructor
      */
     public Armamento(){
-        sitio_proa = new Point();
-        sitio_proa.setLocation(0,0);
+        coord_proa = new Point();
+        coord_proa.setLocation(0,0);
         nombre_Arma = " ";
         fuselaje=null;
         carroceria=null;

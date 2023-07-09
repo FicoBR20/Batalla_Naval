@@ -4,9 +4,12 @@ import java.util.LinkedList;
 
 /**
  * Clase que maneja las coordenadas
- * [numero_Fila, numero_columna]
+ * [numero_Fila, numero_columna] o tambien
+ * [numero_Fila, letra_columna]
  */
 public class Coordenada {
+
+    private LinkedList<Object> ubicacion_coordenada;
     /**
      * Atributo que se refiere a la fila
      * rango [0,9] 10 filas
@@ -91,11 +94,51 @@ public class Coordenada {
         this.letra_Columna = letra_Columna;
     }
 
+    /**
+     * Metodo que entrega la lista de la coordenada
+     * con los 2 campos
+     * @El campo [0] -> int -> numero de la fila
+     * @El campo [1] puede ser de dos tipos;
+     *              @String -> letra que indica la columna
+     *              @int -> numero que indica la columna
+     * @return
+     */
+    public LinkedList<Object> getUbicacion_coordenada() {
+        return ubicacion_coordenada;
+    }
+
+
+    /**
+     * Metodo que configura lo lista de los datos de una coordenada.
+     * Usa un String para determinar la columna
+     * [0] -> int que indica la fila
+     * [1] -> String que indica la columna
+     * @param nunFila
+     * @param letColumna
+     */
+    public void setUbicacion_coordenada(int nunFila, String letColumna) {
+        ubicacion_coordenada.add(0,nunFila);
+        ubicacion_coordenada.add(1,letColumna);
+    }
+
+    /**
+     * Metodo que configura lo lista de los datos de una coordenada.
+     * Usa un int para determinar la columna
+     * [0] -> int que indica la fila
+     * [1] -> int que indica la columna
+     * @param nunFila
+     * @param numColumna
+     */
+    public void setUbicacion_coordenada(int nunFila, int numColumna) {
+        ubicacion_coordenada.add(0,nunFila);
+        ubicacion_coordenada.add(1,numColumna);
+    }
 
     /**
      * Metodo constructor
      */
     public Coordenada(){
+        ubicacion_coordenada = new LinkedList<Object>();
         numero_Fila =99;// valor sin semantica..solo para inicializar.
         numero_Columna =99; // valor sin semantica..solo para inicializar.
         letra_Columna ="";
