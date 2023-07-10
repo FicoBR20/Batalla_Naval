@@ -10,6 +10,8 @@ import java.awt.*;
  */
 public class Celda extends JButton {
 
+    private Coordenada coordenada;
+
     /**
      * Atributo usado para la asignacion especifica de
      * una imagen a un objeto de tipo Casilla
@@ -34,7 +36,9 @@ public class Celda extends JButton {
         this.setBorderPainted(false);
         this.setBorder(BorderFactory.createEmptyBorder());
         this.setHorizontalTextPosition(SwingConstants.CENTER);
-        this.setFocusable(false); //Quita linea de los botones
+        this.setFocusable(true); //Quita linea de los botones
+        this.setEnabled(true);
+        this.setOpaque(true);
         iniciar();
     }
 

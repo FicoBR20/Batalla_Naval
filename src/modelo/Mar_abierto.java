@@ -12,13 +12,13 @@ import java.awt.*;
  */
 public class Mar_abierto extends JPanel {
 
-    private static final int FILAS_ESCENARIO = 10; // contidad de filas
+    public static final int FILAS_ESCENARIO = 10; // contidad de filas
 
-    private static final int COLUMNAS_ESCENARIO = 10;// cantidad de colomnas
+    public static final int COLUMNAS_ESCENARIO = 10;// cantidad de colomnas
 
-    private static final int X_PUNTO_INICAL = 30; // inicio de regilla en eje X
+    public static final int X_PUNTO_INICAL = 30; // inicio de regilla en eje X
 
-    private static final int Y_PUNTO_INICAL = 30; // inicio de regilla en eje Y
+    public static final int Y_PUNTO_INICAL = 30; // inicio de regilla en eje Y
 
     private Coordenada sitio_Inicial; // punto referencial de inicio.
 
@@ -40,10 +40,15 @@ public class Mar_abierto extends JPanel {
 
     private JButton jB_fragata;
 
-    public Mar_abierto(){
-        //Default JFrame configuration
 
-        this.setSize(800,600);
+
+    public Mar_abierto(){
+
+        this.setSize(550,680);
+
+    }
+
+    public void init(){
 
     }
 

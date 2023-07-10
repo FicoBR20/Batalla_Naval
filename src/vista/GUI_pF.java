@@ -1,6 +1,7 @@
 package vista;
 
 import modelo.Grid_escenario;
+import modelo.Mar_abierto;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,11 +36,14 @@ public class GUI_pF extends JFrame {
     public GUI_pF(){
         initGUI();
 
+        grid_escenario = new Grid_escenario();
+
+
         //Default JFrame configuration
         this.setTitle("Batalla Naval");
         this.setSize(600,600);
         //this.pack();
-        this.setResizable(false);
+        this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -54,7 +58,6 @@ public class GUI_pF extends JFrame {
         GridBagLayout gridBagLayout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
 
-        grid_escenario = new Grid_escenario();
         jP_escenario = new JPanel();
         jP_escenario.setSize(400,400);
         jP_escenario.setPreferredSize(new Dimension(400,400));
@@ -88,7 +91,7 @@ public class GUI_pF extends JFrame {
 
         this.add(headerProject,BorderLayout.NORTH);
         this.add(jButton_Next, BorderLayout.SOUTH);
-        this.add(jP_escenario, BorderLayout.CENTER);
+        this.add(jPanel_Inicio, BorderLayout.CENTER);
     }
 
     /**
@@ -109,8 +112,8 @@ public class GUI_pF extends JFrame {
     public void cambiarPaneles( JPanel jPanel_new){
 
         this.remove(jPanel_Inicio);
-        jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
-        this.add(jPanel_Inicio,BorderLayout.CENTER);
+        //jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
+        this.add(jPanel_new,BorderLayout.CENTER);
 
         repaint();
 
@@ -125,9 +128,17 @@ public class GUI_pF extends JFrame {
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            JButton [][] cuadriculo = new JButton[Mar_abierto.FILAS_ESCENARIO][Mar_abierto.COLUMNAS_ESCENARIO];
+
             if (e.getSource()==jButton_Next){
 
-                jP_escenario.setBackground(Color.ORANGE);
+                cambiarPaneles(grid_escenario);
+
+
+
+
+
+                //jP_escenario.getComponent(cuadriculo);
 
 
 
