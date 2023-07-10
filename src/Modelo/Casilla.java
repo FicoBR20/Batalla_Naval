@@ -1,4 +1,6 @@
-package modelo;
+package Modelo;
+
+import modelo.Coordenada;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,6 +16,7 @@ public class Casilla extends JButton {
      * Atributo usado para la asignacion especifica de
      * una imagen a un objeto de tipo Casilla
      */
+    private Coordenada coordenada;
     private  int estado;
     private  int turno;
     private int fila;
@@ -39,6 +42,7 @@ public class Casilla extends JButton {
     }
 
     public void iniciar() {
+        coordenada = new Coordenada();
         turno = 1;
         W_H = 28;
         this.setPreferredSize(new Dimension(W_H,W_H));

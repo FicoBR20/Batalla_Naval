@@ -13,7 +13,7 @@ public class Tablero extends FondoPanel {
     /**
      * Array de Jbuttons tipo Casilla
      */
-    private  modelo.Casilla[][] casilla;
+    private  Casilla[][] casilla;
     private Escucha escucha;
     private int matris;
     private int daño;
@@ -33,7 +33,7 @@ public class Tablero extends FondoPanel {
         estado_tablero = 1;
         matris = 12;
         daño = 0;
-        casilla = new modelo.Casilla[matris][matris];
+        casilla = new Casilla[matris][matris];
         set_ruta_fondo("/recursos/fondo.png");
         GridBagLayout gridBagLayout = new GridBagLayout();
         this.setLayout(gridBagLayout);
@@ -57,7 +57,7 @@ public class Tablero extends FondoPanel {
 
         for (int i = 0; i < matris; i++) {
             for (int j = 0; j < matris; j++) {
-                casilla[i][j] = new modelo.Casilla();
+                casilla[i][j] = new Casilla();
                 casilla[i][j].set_estado(1);
                 casilla[i][j].addActionListener(escucha);
                 casilla[i][j].addMouseListener(escucha);

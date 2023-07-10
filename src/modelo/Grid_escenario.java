@@ -124,16 +124,39 @@ public class Grid_escenario extends JPanel {
 
         }
     }
-//
-//    public static void main(String[] args){
-//
-//
-//            Grid_escenario escena_1 = new Grid_escenario();
-//
-//
-//
-//
-//    }
+
+    public void dibujar_tablero() {
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        Celda [][] regilla_Celdas = new Celda[10][10];
+
+
+
+        for (int i = 0; i < Mar_abierto.FILAS_ESCENARIO; i++) {
+            for (int j = 0; j < Mar_abierto.COLUMNAS_ESCENARIO; j++) {
+                regilla_Celdas[i][j] = new Celda();
+
+                coordenada.setNumero_Fila(i);
+                coordenada.setNumero_Columna(j);
+
+
+                regilla_Celdas[i][j].set_estado(1);//imagen Agua
+                regilla_Celdas[i][j].addActionListener(escucha);
+              //  regilla_Celdas[i][j].addMouseListener(escucha);
+                //nota set de datos de la casilla
+//                casilla[i][j].set_fila_columna(j,i);
+                //regilla_Celdas[i][j].recoger_datos(j,i,"",0);//fila, columna, horientacion y tamano
+                regilla_Celdas[i][j].setFont(new Font(Font.SERIF,Font.BOLD,20));
+                regilla_Celdas[i][j].setForeground(new Color(0xFFFFFF));
+
+                gbc.gridx=i; // columna 0
+                gbc.gridy=j; // fila 0
+                gbc.gridwidth=1; // ocupara 4 columnas
+                gbc.gridheight=1; // ocupara 3 filas
+                this.add(regilla_Celdas[i][j],gbc);
+            }
+        }
+    }
 
 
 }

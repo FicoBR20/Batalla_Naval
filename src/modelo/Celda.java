@@ -174,4 +174,11 @@ public class Celda extends JButton {
                 this.getWidth(), this.getWidth());
     }
 
+//    public void recoger_datos(int fila, int columna, String orientacion, int tamaño) {
+//        this.fila = fila;
+//        this.columna = columna;
+//        this.orientacion = orientacion;
+//        this.tamaño = tamaño;
+//    }
+
 }
