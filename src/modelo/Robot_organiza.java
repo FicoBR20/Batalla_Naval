@@ -107,6 +107,9 @@ public class Robot_organiza {
 
             auxiliar = proa.getNumero_Fila();
 
+            //necesitamos saber si la cantidad de ceros es menor o igual
+            // al int tamano Area
+
 
 
         }
