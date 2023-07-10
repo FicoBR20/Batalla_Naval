@@ -55,6 +55,12 @@ public class GUI_pF extends JFrame {
      */
     private void initGUI() {
 
+        grid_escenario = new Grid_escenario();
+        grid_escenario.setVisible(true);
+        grid_escenario.setOpaque(true);
+        grid_escenario.setEnabled(true);
+        grid_escenario.setBackground(Color.CYAN);
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
 
@@ -82,6 +88,7 @@ public class GUI_pF extends JFrame {
         jButton_Next.addActionListener(escucha);
 
         jPanel_Inicio = new JPanel();
+        jPanel_Inicio.setSize(new Dimension(600,480));
         jPanel_Inicio.setVisible(true);
         jPanel_Inicio.setBackground(Color.ORANGE);
         jPanel_Inicio.setEnabled(true);
@@ -91,7 +98,8 @@ public class GUI_pF extends JFrame {
 
         this.add(headerProject,BorderLayout.NORTH);
         this.add(jButton_Next, BorderLayout.SOUTH);
-        this.add(jPanel_Inicio, BorderLayout.CENTER);
+        //this.add(jPanel_Inicio, BorderLayout.CENTER);
+        this.add(grid_escenario, BorderLayout.CENTER);
     }
 
     /**
@@ -113,7 +121,8 @@ public class GUI_pF extends JFrame {
 
         this.remove(jPanel_Inicio);
         //jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
-        this.add(jPanel_new,BorderLayout.CENTER);
+        //jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
+        this.add(jPanel_new,BorderLayout.NORTH);
 
         repaint();
 
@@ -125,6 +134,9 @@ public class GUI_pF extends JFrame {
      */
     private class Escucha implements ActionListener {
 
+
+
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
@@ -134,23 +146,12 @@ public class GUI_pF extends JFrame {
 
                 cambiarPaneles(grid_escenario);
 
-
-
-
-
-                //jP_escenario.getComponent(cuadriculo);
-
-
-
-//                jPanel_Inicio.setBackground(Color.CYAN);
-//                jPanel_Inicio.add(jp01, BorderLayout.CENTER);
-//                jButton_Next.setVisible(false);
-
-               // cambiarPaneles(jp01);
+                repaint();
 
 
                 System.out.println(" ..domingo ok Gracias a Dios");
             }
+
 
         }
 
