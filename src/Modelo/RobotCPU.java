@@ -1,16 +1,19 @@
 package Modelo;
 
+import java.util.Random;
+
 public class RobotCPU {
-    private String nombre;
-    private modelo.Tablero tablero;
+    private Modelo.Tablero tablero;
+    private Modelo.Casilla casilla;
+    private int limiteFilas = 10;
+    private int limiteColumnas = 10;
+
 
     /**
      * Constructor de la clase Robot.
-     * @param nombre El nombre del robot.
      * @param tablero El tablero del robot.
      */
-    public RobotCPU(String nombre, modelo.Tablero tablero) {
-        this.nombre = nombre;
+    public RobotCPU(Modelo.Tablero tablero) {
         this.tablero = tablero;
     }
 
@@ -18,18 +21,18 @@ public class RobotCPU {
      * Método para colocar un barco en el tablero de la personaReal de forma aleatoria.
      *
      */
-    public void colocarBarco(Flota flota) {
-        // Colocar el barco en el tablero de forma aleatoria
-        tablero.dibujar_tablero();
-        tablero.bloquear_rejilla();
-
+    public void ubicar_naves_aleatoriamente() {
+        Random random = new Random();
+        int filaNave = random.nextInt();
+        int columnaNave = random.nextInt();
     }
 
     /**
      * Metodo para atacar una casilla en el tablero de la personaReal de forma aleatoria
      */
-    public void  atacar(){
+    public void  atacarAleatoriamente(){
 
     }
+
 
 }
