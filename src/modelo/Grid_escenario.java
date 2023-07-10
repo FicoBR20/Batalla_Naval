@@ -49,7 +49,6 @@ public class Grid_escenario extends JPanel {
         celda = new Celda();
         celda.setVisible(true);
         celda.setEnabled(true);
-        celda.setText("CELDA");
         celda.setOpaque(true);
         celda.addActionListener(escucha);
 
@@ -67,9 +66,11 @@ public class Grid_escenario extends JPanel {
 
         for (int i = 0; i < filadeCeldas.length; i++) {
             filadeCeldas[i] = new Celda();
+            filadeCeldas[i].setFont(new Font(Font.DIALOG,Font.BOLD,20));
+
             filadeCeldas[i].addActionListener(escucha);
-            //filadeCeldas[i].setText(String.valueOf(i));
-            filadeCeldas[i].setText("Filas" + String.valueOf(i));
+            filadeCeldas[i].setText(String.valueOf(i));
+            //filadeCeldas[i].setText("Filas");
 
             filadeCeldas[i].setBounds(coordenada.getNumero_Fila()*i,coordenada.getNumero_Columna()*i,
                     celda.getWidth(), celda.getWidth());
@@ -88,7 +89,8 @@ public class Grid_escenario extends JPanel {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-            //no programarle nada aun
+
+            System.out.println("estoy aqui escuchando todo..");
 
         }
     }

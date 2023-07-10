@@ -41,7 +41,7 @@ public class Celda extends JButton {
         this.setEnabled(true);
         this.setOpaque(true);
         this.setFont(new Font(Font.DIALOG,Font.BOLD,6));
-        this.setPreferredSize(new Dimension(40,40));
+        this.setPreferredSize(new Dimension(80,80));
         iniciar();
     }
 
