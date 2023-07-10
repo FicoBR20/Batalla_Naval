@@ -2,6 +2,7 @@ package Control;
 
 import vista.FondoPanel;
 import vista.GUI;
+import Modelo.Tablero;
 
 import javax.swing.*;
 import java.awt.*;
