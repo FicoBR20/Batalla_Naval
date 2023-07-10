@@ -1,6 +1,5 @@
 package modelo;
 
-import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
@@ -11,13 +10,11 @@ import java.util.LinkedList;
 public class Armamento {
 
     /**
-     * atributo que representa la coordenada
-     * x,y de la proa de una nave o cualquier
-     * ente presente an la batalla.
-     * La ubicacion debe estar asociada al grid del Tablero
-     * tomando en cuenta la medida de cada fila y columna
-     */
-    private Point sitio_proa;
+     * Atributo que representa la coordenada
+     * [fila(int), columna(int / String)] de la parte delantera
+     * de una nave
+     *La columna se puede defiir con un entero o con un String*/
+    private Coordenada coord_proa;
     /**
      * atributo que asigna un nombre
      * a un tipo de nave de combate o
@@ -33,7 +30,7 @@ public class Armamento {
     /**
      * atributo que determina la configuracion
      * de una nave de combate    asi;
-     * 0 -> es agua
+     * 0 -> es agua...por ahora no se usara.
      * 1 -> es metal
      * ejemplo: [1,1,1] es el submarino
      */
@@ -56,9 +53,10 @@ public class Armamento {
 
     /**
      * Atributo que representa el impacto recibido
-     * por una nave en una parte de su carroceria.
+     * por una nave.
+     * Acumulara 1 por cada impacto
      */
-    private int impactada;
+    private double impactada;
     /**
      * atributo que determina el limite de supervivencia
      * de una nave, el default es 100% se impactaron toda la nave
@@ -85,25 +83,6 @@ public class Armamento {
      */private int espacio_ocupado_Y;
 
     //======================================================================= METODOS DE LA CLASE====================
-
-    /**
-     * Metodo que retorna un objeto Point
-     * de cordenadas (x,y).
-     * @return
-     */
-    public Point getSitio_proa() {
-        return sitio_proa.getLocation();
-    }
-
-    /**
-     * Metodo que asigna los valores de las coordenadas
-     * a un objeto Point.
-     * @param varX
-     * @param varY
-     */
-    public void setSitio_proa(int varX,int varY) {
-        sitio_proa.setLocation(varX,varY);
-    }
 
     /**
      * Metodo que retorna el nombre de
@@ -136,11 +115,30 @@ public class Armamento {
      * tomando como parametro la cantidad de celdas
      * @param celdas_X
      */
-    public void setCarroceria_Basica(int celdas_X) {//TODO SE PUEDE PLANTEAR UN ARRAY DE POINTS.
+    public void setCarroceria_Basica(int celdas_X) {
 
-        for (int i = 0; i < celdas_X; i++) {
-            carroceria.add(1); // 1 -> Semantica es METAL osea, NO es AGUA.
+        //[1.1.1] una nave
+        //TODO ...YA CONOZCO EL PUNTO FIJO..Y YA CONOZCO CUANTO MIDE EL ARRAY.
+        // TODO...el punto fijo viene dado por [int, int]
+
+        if (is_rotate==true){
+            for (int i = 0; i <(coord_proa.getNumero_Fila()+celdas_X-1); i++) {
+
+                // [ coorproa [fila, columna]=1;;
+                // [fila +1, columna]
+                // [fila +1, columna]...condicionde parada.
+                coord_proa.setUbicacion_coordenada(coord_proa.getNumero_Columna(),coord_proa.getNumero_Columna());
+
+                coord_proa.setNumero_Fila(coord_proa.getNumero_Fila());
+                coord_proa.setNumero_Columna(coord_proa.getNumero_Columna());
+
+            }
         }
+
+
+//        for (int i = 0; i < celdas_X; i++) {
+//            carroceria.add(1); // 1 -> Semantica es METAL osea, NO es AGUA.
+//        }
     }
 
     /**
@@ -207,19 +205,15 @@ public class Armamento {
     /**
      * Metodo que calcula el porcentaje de impactos
      * recibida por una nave, basandose en la cantidad
-     * de casillas TOCADAS.
+     * de casillas TOCADAS que se acumulan en la variable
+     * impactada
      */
-    public void setNivel_de_impactos() {//TODO SE DEBE VERIFICAR ESTE METODO, CREO QUE ES MEJOR CON POINTS EN EL ARRAY.
-        int auxiliar=0;
-        for (int i = 0; i < carroceria.size(); i++) {
-            if (carroceria.get(i)==3){
-                auxiliar++;
-            }
-        }
-        nivel_de_impactos = carroceria.size()/auxiliar;
+    public void setNivel_de_impactos() {
+
+        nivel_de_impactos = impactada/carroceria.size();
     }
 
-    public int getImpactada() {
+    public double getImpactada() {
         return impactada;
     }
 
@@ -229,16 +223,16 @@ public class Armamento {
      * que La nave fue TOCADA por el rival.
      * @param sito_del_disparo
      */
-    public void setImpactada(Point sito_del_disparo) {
+    public void setImpactada(Coordenada sito_del_disparo) {
 
         for (int i = 0; i < carroceria.size(); i++) {
             if (carroceria.contains(sito_del_disparo)){
-                carroceria.set(i, 3);//semantica 3 -> simboliza que fue impactado
+                impactada+=1.0;
+                System.out.println("..en setImpactada..van..cantidad de impactos.." + ((int) impactada));
             }
 
         }
 
-        this.impactada = impactada;
     }
 
     /**
@@ -256,13 +250,13 @@ public class Armamento {
      * segun el porcentaje del nievl de impacto (TOCADOS)
      */
     public void setNave_Hundida() {
-        if (nivel_de_impactos==100.0){
+        if (nivel_de_impactos==1.0){
             nave_Hundida=true;
         }
     }
 
     /**
-     * Metodo que entrega la likedlist fuselaje
+     * Metodo que entrega el Arraylist fuselaje
      * @return
      */
     public LinkedList<Object> getFuselaje() {
@@ -270,17 +264,21 @@ public class Armamento {
     }
 
     /**
-     * Metodo que configura la linkedlist fuselaje
+     * Metodo que configura el Arraylist fuselaje
      * contiene 6 atributos de la clase distribuidos
      * en 6 campos.
      */
     public void setFuselaje() {
-        fuselaje.add(sitio_proa);// campo [0]
-        fuselaje.add(nombre_Arma);// campo[1]
-        fuselaje.add(carroceria);// campo[2]
-        fuselaje.add(is_rotate);// campo[3]
-        fuselaje.add(icono_asociado);// campo[4]
-        fuselaje.add(espacio_libre);// campo[5]
+        fuselaje.add(getNombre_Arma());// campo[0]
+        fuselaje.add(coord_proa.getUbicacion_coordenada());// campo[1]
+        fuselaje.add(getIs_rotate());// campo[2]
+        fuselaje.add(getIcono_asociado());// campo[3]
+        fuselaje.add(getEspacio_libre());// campo[4]
+        fuselaje.add(getImpactada());// campo[5]
+        fuselaje.add(getNivel_de_impactos());// campo[6]
+        fuselaje.add(getNave_Hundida());// campo[7]
+        fuselaje.add(getEspacio_ocupado_X());// campo[8]
+        fuselaje.add(getEspacio_ocupado_Y());// campo[9]
 
     }
 
@@ -297,7 +295,8 @@ public class Armamento {
      * Metodo que configura el espacio ocupado
      * en X -> HORIZONTALMENTE por una nave.
      */
-    public void setEspacio_ocupado_X() {
+    public void setEspacio_ocupado_X() {//TODO...verificar probablemente este dato en x y Y no sea necesario.
+        //TODO...bastaria con configurar el array carroceria y usar el .size vertical y horizontalmente. fico.
         if (is_rotate==true){
             espacio_ocupado_X=1;
         }
@@ -332,15 +331,14 @@ public class Armamento {
      * Metodo constructor
      */
     public Armamento(){
-        sitio_proa = new Point();
-        sitio_proa.setLocation(0,0);
+        coord_proa = new Coordenada();
         nombre_Arma = " ";
         fuselaje=null;
         carroceria=null;
         is_rotate=false;
         icono_asociado=99; // valor de inicializacion sin SEMANTICA
         espacio_libre=1;
-        impactada = 99; // valor de inicializacion sin SEMANTICA
+        impactada = 0; // la nave esta nueva no ha sido impactada
         nivel_de_impactos=100.0;
         nave_Hundida = false;
 

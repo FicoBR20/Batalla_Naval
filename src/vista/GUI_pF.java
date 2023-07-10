@@ -1,5 +1,8 @@
 package vista;
 
+import modelo.Grid_escenario;
+import modelo.Mar_abierto;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,6 +14,10 @@ import java.awt.event.ActionListener;
  * @version v.1.0.0 date:21/03/2023
  */
 public class GUI_pF extends JFrame {
+
+    private JPanel jP_escenario;
+
+    private Grid_escenario grid_escenario;
 
     private JP_01_Info_Reglas_del_Juego jp01;
 
@@ -29,11 +36,14 @@ public class GUI_pF extends JFrame {
     public GUI_pF(){
         initGUI();
 
+        grid_escenario = new Grid_escenario();
+
+
         //Default JFrame configuration
         this.setTitle("Batalla Naval");
-        this.setSize(600,400);
+        this.setSize(600,600);
         //this.pack();
-        this.setResizable(false);
+        this.setResizable(true);
         this.setVisible(true);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -45,8 +55,21 @@ public class GUI_pF extends JFrame {
      */
     private void initGUI() {
 
+        grid_escenario = new Grid_escenario();
+        grid_escenario.setVisible(true);
+        grid_escenario.setOpaque(true);
+        grid_escenario.setEnabled(true);
+        grid_escenario.setBackground(Color.CYAN);
+
         GridBagLayout gridBagLayout = new GridBagLayout();
         GridBagConstraints gbc = new GridBagConstraints();
+
+        jP_escenario = new JPanel();
+        jP_escenario.setSize(400,400);
+        jP_escenario.setPreferredSize(new Dimension(400,400));
+        jP_escenario.setBackground(Color.RED);
+        //jP_escenario.add(grid_escenario, BorderLayout.CENTER);
+
 
         jp01 = new JP_01_Info_Reglas_del_Juego();
         jp01.setVisible(true);
@@ -65,6 +88,7 @@ public class GUI_pF extends JFrame {
         jButton_Next.addActionListener(escucha);
 
         jPanel_Inicio = new JPanel();
+        jPanel_Inicio.setSize(new Dimension(600,480));
         jPanel_Inicio.setVisible(true);
         jPanel_Inicio.setBackground(Color.ORANGE);
         jPanel_Inicio.setEnabled(true);
@@ -74,7 +98,8 @@ public class GUI_pF extends JFrame {
 
         this.add(headerProject,BorderLayout.NORTH);
         this.add(jButton_Next, BorderLayout.SOUTH);
-        this.add(jPanel_Inicio, BorderLayout.CENTER);
+        //this.add(jPanel_Inicio, BorderLayout.CENTER);
+        this.add(grid_escenario, BorderLayout.CENTER);
     }
 
     /**
@@ -95,8 +120,9 @@ public class GUI_pF extends JFrame {
     public void cambiarPaneles( JPanel jPanel_new){
 
         this.remove(jPanel_Inicio);
-        jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
-        this.add(jPanel_Inicio,BorderLayout.CENTER);
+        //jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
+        //jPanel_Inicio.add(jPanel_new, BorderLayout.CENTER);
+        this.add(jPanel_new,BorderLayout.NORTH);
 
         repaint();
 
@@ -108,22 +134,24 @@ public class GUI_pF extends JFrame {
      */
     private class Escucha implements ActionListener {
 
+
+
+
         @Override
         public void actionPerformed(ActionEvent e) {
 
+            JButton [][] cuadriculo = new JButton[Mar_abierto.FILAS_ESCENARIO][Mar_abierto.COLUMNAS_ESCENARIO];
+
             if (e.getSource()==jButton_Next){
 
+                cambiarPaneles(grid_escenario);
+
+                repaint();
 
 
-                jPanel_Inicio.setBackground(Color.CYAN);
-                jPanel_Inicio.add(jp01, BorderLayout.CENTER);
-                jButton_Next.setVisible(false);
-
-               // cambiarPaneles(jp01);
-
-
-                System.out.println(" estoy escuchando bien");
+                System.out.println(" ..domingo ok Gracias a Dios");
             }
+
 
         }
 

@@ -11,6 +11,12 @@ import java.awt.*;
 public class Celda extends JButton {
 
     /**
+     * Atributo [fila, columna] de
+     * una Celda.
+     */
+    private Coordenada ubicacion_Celda;
+
+    /**
      * Atributo usado para la asignacion especifica de
      * una imagen a un objeto de tipo Casilla
      */
@@ -29,12 +35,17 @@ public class Celda extends JButton {
      */
     public Celda() {
 
-        this.setBackground(null);
+        //this.setBackground(null);
 //        this.setContentAreaFilled(false);
-        this.setBorderPainted(false);
-        this.setBorder(BorderFactory.createEmptyBorder());
+        //this.setBorderPainted(false);
+       // this.setBorder(BorderFactory.createEmptyBorder());
         this.setHorizontalTextPosition(SwingConstants.CENTER);
-        this.setFocusable(false); //Quita linea de los botones
+        this.setFocusable(true); //Quita linea de los botones
+        this.setVisible(true);
+        this.setEnabled(true);
+        this.setOpaque(true);
+        this.setFont(new Font(Font.DIALOG,Font.BOLD,6));
+        this.setPreferredSize(new Dimension(80,80));
         iniciar();
     }
 
@@ -44,9 +55,13 @@ public class Celda extends JButton {
      * Metodo presente en el constructor de la clase.
      */
     public void iniciar() {
+        ubicacion_Celda = new Coordenada();
         estado = 1;// Semantica -> es Agua
-        this.setPreferredSize(new Dimension(40,40));
     }
+
+//    public void ubicar_Celda(){
+//
+//    }
 
     /**
      * Metodo que asigna la imagen del agua a un
@@ -135,7 +150,7 @@ public class Celda extends JButton {
      * Metodo que asigna una imagen
      * segun el valor de la variable estado.
      */
-    private void poner_animacion() {
+    private void asignar_imagen() {
         switch (estado){
             case 1->{
                 es_agua();
@@ -147,6 +162,16 @@ public class Celda extends JButton {
                 esta_tocado();
             }
         }
+    }
+
+    /**
+     * Metodo que ubica una Celda
+     * segun una Coordenada rebibida
+     * @param coord
+     */
+    public void ubicar_Celda(Coordenada coord){
+        this.setBounds(coord.getNumero_Fila(), coord.getNumero_Columna(),
+                this.getWidth(), this.getWidth());
     }
 
 }
