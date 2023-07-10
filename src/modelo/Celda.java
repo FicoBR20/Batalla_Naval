@@ -165,12 +165,13 @@ public class Celda extends JButton {
     }
 
     /**
-     * Metodo que ubica una Celda
-     * segun una Coordenada rebibida
-     * @param coord
+     * Metodo que ubica una Celda segun
+     * un x y recibido usa setBounds
+     * @param filadada
+     * @param columnadada
      */
-    public void ubicar_Celda(Coordenada coord){
-        this.setBounds(coord.getNumero_Fila(), coord.getNumero_Columna(),
+    public void ubicar_Celda(int filadada, int columnadada){
+        this.setBounds(filadada, columnadada,
                 this.getWidth(), this.getWidth());
     }
 

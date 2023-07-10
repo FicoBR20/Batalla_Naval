@@ -78,8 +78,7 @@ public class Grid_escenario extends JPanel {
 
         Celda [] centenaria = new Celda[100];
 
-        int limite_fila=0;
-        int limite_columna=0;
+
 
         for (int i = 0; i < 100; i++) {
 
@@ -100,13 +99,13 @@ public class Grid_escenario extends JPanel {
 
                 filadeCeldas[i][j].setBounds(coordenada.getNumero_Fila() * i, coordenada.getNumero_Columna() * i,
                         celda.getWidth(), celda.getWidth());
-                jP_central.add(filadeCeldas[i][j]);
+               // jP_central.add(filadeCeldas[i][j]);
             }
 
         }
 
-
-        this.add(jP_central, BorderLayout.CENTER);
+        dibujar_tablero();
+       // this.add(jP_central, BorderLayout.CENTER);
 
     }
 
@@ -126,18 +125,27 @@ public class Grid_escenario extends JPanel {
     }
 
     public void dibujar_tablero() {
-        GridBagConstraints gbc = new GridBagConstraints();
+
+        //    public void ubicar_Celda(Coordenada coord){
+
+        int limite_fila=0;
+        int limite_columna=0;
 
         Celda [][] regilla_Celdas = new Celda[10][10];
 
 
 
         for (int i = 0; i < Mar_abierto.FILAS_ESCENARIO; i++) {
-            for (int j = 0; j < Mar_abierto.COLUMNAS_ESCENARIO; j++) {
+            for (int j = i; j < Mar_abierto.COLUMNAS_ESCENARIO; j++) {
                 regilla_Celdas[i][j] = new Celda();
 
                 coordenada.setNumero_Fila(i);
                 coordenada.setNumero_Columna(j);
+                coordenada.setUbicacion_coordenada(i,j);
+
+                celda.ubicar_Celda(i*celda.getWidth(),j*celda.getWidth());
+
+                System.out.println(" Dato " + coordenada.getUbicacion_coordenada());
 
 
                 regilla_Celdas[i][j].set_estado(1);//imagen Agua
@@ -149,11 +157,12 @@ public class Grid_escenario extends JPanel {
                 regilla_Celdas[i][j].setFont(new Font(Font.SERIF,Font.BOLD,20));
                 regilla_Celdas[i][j].setForeground(new Color(0xFFFFFF));
 
-                gbc.gridx=i; // columna 0
-                gbc.gridy=j; // fila 0
-                gbc.gridwidth=1; // ocupara 4 columnas
-                gbc.gridheight=1; // ocupara 3 filas
-                this.add(regilla_Celdas[i][j],gbc);
+//                gbc.gridx=i; // columna 0
+//                gbc.gridy=j; // fila 0
+//                gbc.gridwidth=1; // ocupara 4 columnas
+//                gbc.gridheight=1; // ocupara 3 filas
+                jP_central.add(regilla_Celdas[i][j]);
+                this.add(jP_central, BorderLayout.CENTER);
             }
         }
     }
