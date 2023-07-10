@@ -4,6 +4,7 @@ import java.util.LinkedList;
 
 /**
  * Clase que maneja las coordenadas
+ * es una LinkedList de 2 campos.
  * [numero_Fila, numero_columna] o tambien
  * [numero_Fila, letra_columna]
  */

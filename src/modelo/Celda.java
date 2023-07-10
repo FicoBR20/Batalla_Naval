@@ -10,7 +10,11 @@ import java.awt.*;
  */
 public class Celda extends JButton {
 
-    private Coordenada coordenada;
+    /**
+     * Atributo [fila, columna] de
+     * una Celda.
+     */
+    private Coordenada ubicacion_Celda;
 
     /**
      * Atributo usado para la asignacion especifica de
@@ -51,7 +55,7 @@ public class Celda extends JButton {
      * Metodo presente en el constructor de la clase.
      */
     public void iniciar() {
-        coordenada = new Coordenada();
+        ubicacion_Celda = new Coordenada();
         estado = 1;// Semantica -> es Agua
     }
 
@@ -158,6 +162,16 @@ public class Celda extends JButton {
                 esta_tocado();
             }
         }
+    }
+
+    /**
+     * Metodo que ubica una Celda
+     * segun una Coordenada rebibida
+     * @param coord
+     */
+    public void ubicar_Celda(Coordenada coord){
+        this.setBounds(coord.getNumero_Fila(), coord.getNumero_Columna(),
+                this.getWidth(), this.getWidth());
     }
 
 }

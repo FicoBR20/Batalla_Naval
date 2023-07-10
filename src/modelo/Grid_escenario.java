@@ -9,6 +9,18 @@ import java.awt.event.ActionListener;
 
 public class Grid_escenario extends JPanel {
 
+    /**
+     * Atributo del inicio del
+     * panel en sentido Horizontal
+     */
+    private int x_Inicial;
+
+    /**
+     * Atributo del inicio del
+     * panel en el sentido Vertical
+     */
+    private int y_Inicial;
+
     private Coordenada coordenada;
 
     private JButton jButton;
@@ -62,19 +74,34 @@ public class Grid_escenario extends JPanel {
 
         Celda [][] cuadricula_fC = new Celda [Mar_abierto.FILAS_ESCENARIO] [Mar_abierto.COLUMNAS_ESCENARIO];
 
-        Celda [] filadeCeldas = new Celda[10];
+        Celda [][] filadeCeldas = new Celda[10][10];
 
-        for (int i = 0; i < filadeCeldas.length; i++) {
-            filadeCeldas[i] = new Celda();
-            filadeCeldas[i].setFont(new Font(Font.DIALOG,Font.BOLD,20));
+        Celda [] centenaria = new Celda[100];
 
-            filadeCeldas[i].addActionListener(escucha);
-            filadeCeldas[i].setText(String.valueOf(i));
-            //filadeCeldas[i].setText("Filas");
+        int limite_fila=0;
+        int limite_columna=0;
 
-            filadeCeldas[i].setBounds(coordenada.getNumero_Fila()*i,coordenada.getNumero_Columna()*i,
-                    celda.getWidth(), celda.getWidth());
-            jP_central.add(filadeCeldas[i]);
+        for (int i = 0; i < 100; i++) {
+
+            centenaria[i] = new Celda();
+
+        }
+
+        for (int i = 0; i < 10; i++) {
+            for (int j = i ; j < 10; j++) {
+
+
+                filadeCeldas[i][j] = new Celda();
+                filadeCeldas[i][j].setFont(new Font(Font.DIALOG, Font.BOLD, 10));
+
+                filadeCeldas[i][j].addActionListener(escucha);
+                filadeCeldas[i][j].setText("Fila\n" +String.valueOf(i) + "\n" + " Colomna" + String.valueOf(j));
+                //filadeCeldas[i].setText("Filas");
+
+                filadeCeldas[i][j].setBounds(coordenada.getNumero_Fila() * i, coordenada.getNumero_Columna() * i,
+                        celda.getWidth(), celda.getWidth());
+                jP_central.add(filadeCeldas[i][j]);
+            }
 
         }
 
@@ -84,7 +111,10 @@ public class Grid_escenario extends JPanel {
     }
 
 
-
+    /**
+     * Clase que configura las escuchas del
+     * Action Listener.
+     */
     private class Escucha implements ActionListener {
 
         @Override
