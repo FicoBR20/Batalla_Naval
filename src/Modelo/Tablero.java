@@ -17,6 +17,9 @@ public class Tablero extends FondoPanel {
     private int tamaño_flota_cpu;
     private int daño;
     private int estado_tablero;
+    /**
+     * cantidad de cuadritos de la nave
+     */
     private int tamaño;
     private int contador;
     private int toques;
@@ -448,7 +451,6 @@ public class Tablero extends FondoPanel {
 
         }
     }
-
 
 
     public void sest_tamaño_HV(int tamaño, String orientacion) {
