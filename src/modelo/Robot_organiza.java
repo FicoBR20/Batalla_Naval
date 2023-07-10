@@ -6,9 +6,11 @@ import java.util.Random;
 
 public class Robot_organiza {
 
+    private Armamento armamento;
+
     private int filaNave;
 
-    private int ColumnaNav;
+    private int columnaNav;
 
     private String direccion;
 
@@ -20,20 +22,20 @@ public class Robot_organiza {
         return filaNave;
     }
 
-    public void setFilaNave(int filaNave) {
+    public void setFilaNave() {
         Random random=new Random();
-        filaNave = random.nextInt(10);
+        int filaNave = random.nextInt(10);
         this.filaNave = filaNave;
     }
 
     public int getColumnaNav() {
-        return ColumnaNav;
+        return columnaNav;
     }
 
-    public void setColumnaNav(int columnaNav) {
+    public void setColumnaNav() {
         Random random=new Random();
-        columnaNav = random.nextInt(10);
-        ColumnaNav = columnaNav;
+        int columnaNav = random.nextInt(10);
+        this.columnaNav = columnaNav;
     }
 
     /**
@@ -73,6 +75,45 @@ public class Robot_organiza {
      * Constructor
      */
     public Robot_organiza(){
+
+        armamento.setNombre_Arma("PortaAviones");
+        armamento.setCarroceria_Basica(4);
+
+    }
+    private void init(){
+        armamento = new Armamento();
+        filaNave = 99;
+        columnaNav =99;
+        direccion=" ";
+        coordenada = new Coordenada();
+        flota = new ArrayList<Armamento>(10);
+
+    }
+//oleano cabeoNO ( int(flota[0].size), Coordena Proa(x,y). int Direccion){
+
+    /**
+     * Metodo que decide true o false si una nave cabe o no
+     * ya sea en una colomna o en una fila.
+     * @param tamanoArma
+     * @param proa
+     * @param sentido
+     * @return
+     */
+    public boolean cabe(int tamanoArma, Coordenada proa, String sentido){//proa(fila, columna)
+
+        int auxiliar=99;
+
+        if (sentido=="v"){
+
+            auxiliar = proa.getNumero_Fila();
+
+
+
+        }
+        else if (sentido=="H"){
+
+        }
+        return true; /// verificar.
 
     }
 
